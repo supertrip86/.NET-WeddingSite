@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WeddingSite.BackEnd.DAL;
-using WeddingSite.BackEnd.Shared;
+using WeddingSite.BackEnd.Shared.Structs;
 using WeddingSite.BackEnd.Utilities;
 using Models = WeddingSite.BackEnd.DAL.Models;
 using Responses = WeddingSite.BackEnd.DAL.Responses;
@@ -15,16 +15,11 @@ namespace WeddingSite.BackEnd.Controllers
     [Route("api/[controller]")]
     public class WeddingSiteController : BaseController
     {
-        private readonly string _encryptionString;
-
-        public WeddingSiteController(IMapper _mapper, IConfiguration _config, WeddingSiteDbContext _context) : base(_mapper, _config, _context) 
-        {
-            _encryptionString = _config["EncryptionStrings:CryptographyString"];
-        }
+        public WeddingSiteController(IMapper _mapper, IConfiguration _config, WeddingSiteDbContext _context) : base(_mapper, _config, _context) { }
 
         #region GET
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllInvitations()
@@ -45,7 +40,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetInvitationsByName()
@@ -71,7 +66,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetInvitationById(int id)
@@ -97,7 +92,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllGuests()
@@ -118,7 +113,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetGuestsByName()
@@ -144,7 +139,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetGuestsByInvitationName()
@@ -177,7 +172,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetGuestById(int id)
@@ -206,7 +201,7 @@ namespace WeddingSite.BackEnd.Controllers
 
         #region PUT
 
-        [Authorize(Policy = EPolicies.Authorized)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateInvitation([FromBody] Responses.Invitee request)
@@ -261,7 +256,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Admin)]
+        [Authorize(Policy = Policies.Admin)]
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateGuest([FromBody] Responses.Guest request)
@@ -299,16 +294,18 @@ namespace WeddingSite.BackEnd.Controllers
 
         #region POST
 
-        [Authorize(Policy = EPolicies.Admin)]
+        [Authorize(Policy = Policies.Admin)]
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> AddInvitations([FromBody] List<Responses.Invitee> invitees)
         {
             try
             {
+                var encryptionString = _config["EncryptionStrings:CryptographyString"];
+                
                 foreach (var invitee in invitees)
                 {
-                    invitee.Password = Cryptography.EncryptString(invitee.Password, _encryptionString);
+                    invitee.Password = Cryptography.EncryptString(invitee.Password, encryptionString);
                 }
 
                 var entities = _mapper.Map<List<Models.Invitee>>(invitees);
@@ -329,7 +326,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = EPolicies.Admin)]
+        [Authorize(Policy = Policies.Admin)]
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> AddGuests([FromBody] ICollection<Responses.Guest> guests)

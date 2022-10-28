@@ -1,6 +1,6 @@
-﻿namespace WeddingSite.BackEnd.Shared
+﻿namespace WeddingSite.BackEnd.Shared.Structs
 {
-    public struct EPolicies
+    public struct Policies
     {
         public const string Admin = "Admin";
         public const string Authorized = "Authorized";

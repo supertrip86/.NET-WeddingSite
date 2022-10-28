@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using WeddingSite.BackEnd.DAL;
 using WeddingSite.BackEnd.DAL.Mappings;
 using WeddingSite.BackEnd.Middlewares;
-using WeddingSite.BackEnd.Shared;
+using WeddingSite.BackEnd.Shared.Structs;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +19,14 @@ try
 
     builder.Host.UseSerilog();
 
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    builder.Services.AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
                     .AddJwtBearer(options =>
                     {
+                        options.SaveToken = true;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuer = true,
@@ -30,27 +35,30 @@ try
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
                             ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                            ClockSkew = TimeSpan.Zero
                         };
                     });
 
     builder.Services.AddAuthorization(options =>
     {
-        options.AddPolicy(EPolicies.Admin, policy => policy.RequireRole(builder.Configuration["UserRoles:Admin"]));
-        options.AddPolicy(EPolicies.Authorized, policy => policy.RequireRole(builder.Configuration["UserRoles:Admin"], builder.Configuration["UserRoles:User"]));
+        options.AddPolicy(Policies.Admin, policy => policy.RequireRole(Roles.Admin));
+        options.AddPolicy(Policies.Authorized, policy => policy.RequireRole(Roles.Admin, Roles.User));
     });
 
     builder.Services.AddMvc();
 
     builder.Services.AddAutoMapper(typeof(GuestsMapping));
     builder.Services.AddAutoMapper(typeof(InvitationsMapping));
+    builder.Services.AddAutoMapper(typeof(ActiveInviteesMapping));
 
     builder.Services.AddDbContext<WeddingSiteDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
 
-    builder.Services.AddControllers().AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    });
+    builder.Services.AddControllers()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                    });
 
     var app = builder.Build();
 

@@ -28,6 +28,12 @@ namespace WeddingSite.BackEnd.DAL
                         .HasIndex(p => new { p.LastName, p.FirstName })
                         .IsUnique();
 
+            modelBuilder.Entity<ActiveInvitee>()
+                        .HasOne(k => k.Invitation)
+                        .WithOne(k => k.ActiveInvitee)
+                        .HasForeignKey<ActiveInvitee>(k => k.InvitationRefId)
+                        .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
 

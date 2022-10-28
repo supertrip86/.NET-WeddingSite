@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WeddingSite.BackEnd.DAL.Models
 {
-    [Table("Invitees")]
-    public class Invitee
+    [Table("ActiveInvitees")]
+    public class ActiveInvitee
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("InvitationId")]
-        public int InvitationId { get; set; }
+        [Column("Id")]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -25,31 +25,26 @@ namespace WeddingSite.BackEnd.DAL.Models
 
         [Required]
         [StringLength(100)]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.Text)]
         [Column("Email")]
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [DataType(DataType.Password)]
-        [Column("Password")]
-        public string Password { get; set; } = string.Empty;
-
-        [Required]
-        [Column("Attending")]
-        public bool Attending { get; set; }
-
-        [Required]
-        [StringLength(100)]
+        [StringLength(int.MaxValue)]
         [DataType(DataType.Text)]
-        [Column("Role")]
-        public string Role { get; set; } = string.Empty;
+        [Column("RefreshToken")]
+        public string RefreshToken { get; set; } = string.Empty;
 
         [Required]
-        [Column("GuestsCount")]
-        public int GuestsCount { get; set; }
+        [DataType(DataType.DateTime)]
+        [Column("Active")]
+        public DateTime Active { get; set; } = DateTime.Now;
 
-        public virtual ICollection<Guest> Guests { get; set; } = new List<Guest>();
+        [Required]
+        [ForeignKey("Invitation")]
+        [Column("InvitationId")]
+        public int InvitationRefId { get; set; }
 
-        public virtual ActiveInvitee? ActiveInvitee { get; set; }
+        public virtual Invitee? Invitation { get; set; }
     }
 }
