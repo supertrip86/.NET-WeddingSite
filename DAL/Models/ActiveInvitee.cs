@@ -41,6 +41,11 @@ namespace WeddingSite.BackEnd.DAL.Models
         public DateTime Active { get; set; } = DateTime.Now;
 
         [Required]
+        [DataType(DataType.DateTime)]
+        [Column("Expiration")]
+        public DateTime Expiration { get; set; } = DateTime.Now.AddMonths(6);
+
+        [Required]
         [ForeignKey("Invitation")]
         [Column("InvitationId")]
         public int InvitationRefId { get; set; }

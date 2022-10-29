@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,12 +22,28 @@ namespace WeddingSite.BackEnd.Controllers
     [Route("api/[controller]")]
     public class AuthController : BaseController
     {
-        public AuthController(IMapper _mapper, IConfiguration _config, WeddingSiteDbContext _context) : base(_mapper, _config, _context) { }
+        private readonly TokenValidationParameters _tokenValidationParameters;
+        private readonly EncryptionStrings _encryption;
+        private readonly JwtParameters _jwtParams;
+
+        public AuthController(
+                IMapper _mapper,
+                WeddingSiteDbContext _context,
+                IOptions<EncryptionStrings> encryption,
+                IOptions<JwtParameters> jwtParams,
+                TokenValidationParameters tokenParameters
+            )
+            : base(_mapper, _context)
+        {
+            _tokenValidationParameters = tokenParameters;
+            _encryption = encryption.Value;
+            _jwtParams = jwtParams.Value;
+        }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Login([FromBody] CurrentUser userLogin)
+        public async Task<IActionResult> Login([FromBody] AppLogin userLogin)
         {
             try
             {
@@ -34,7 +51,7 @@ namespace WeddingSite.BackEnd.Controllers
 
                 if (user == default)
                 {
-                    return Unauthorized();
+                    return Unauthorized("User not found");
                 }
 
                 var claims = new[]
@@ -46,13 +63,13 @@ namespace WeddingSite.BackEnd.Controllers
                     new Claim(ClaimTypes.Role, user.Role),
                 };
 
-                var token = await GenerateCurrentToken(user, new ClaimsIdentity(claims));
+                var tokens = await GenerateCurrentToken(user, new ClaimsIdentity(claims));
 
-                var _ = JwtTokenValidate(token);
+                HttpContext.User = new JwtSecurityTokenHandler().ValidateToken(tokens.AccessToken, _tokenValidationParameters, out var _);
 
                 Log.Information($"{user.FirstName} {user.LastName} has been authenticated");
 
-                return Ok(token);
+                return Ok(tokens);
 
             }
             catch (Exception ex)
@@ -66,23 +83,55 @@ namespace WeddingSite.BackEnd.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> RefreshLogin([FromBody] CurrentToken currentToken)
+        public async Task<IActionResult> RefreshLogin([FromBody] AppTokens tokens)
         {
             try
             {
-                var securityToken = JwtTokenValidate(currentToken);
+                #region Modifica1
 
-                if (securityToken is JwtSecurityToken token && !token.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
+                //var refreshToken = Request.Cookies["refreshToken"];
+                //var accessToken = Request.Cookies["accessToken"];
+
+                //if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(refreshToken))
+                //{
+                //    return Unauthorized();
+                //}
+
+                //var securityToken = JwtTokenValidate(new AppTokens
+                //{
+                //    AccessToken = accessToken,
+                //    RefreshToken = refreshToken
+                //});
+
+                if (string.IsNullOrEmpty(tokens.AccessToken) || string.IsNullOrEmpty(tokens.RefreshToken))
                 {
-                    return Unauthorized();
+                    return Unauthorized("Missing tokens");
+                }
+
+                #endregion
+
+                _tokenValidationParameters.ValidateLifetime = false;
+
+                HttpContext.User = new JwtSecurityTokenHandler().ValidateToken(tokens.AccessToken, _tokenValidationParameters, out var securityToken);
+
+                _tokenValidationParameters.ValidateLifetime = true;
+
+                if (securityToken is JwtSecurityToken token && !token.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return Unauthorized("Invalid access token");
                 }
 
                 var activeInvitee = await _context.GetAll<Models.ActiveInvitee>()
-                                                  .FirstOrDefaultAsync(x => x.RefreshToken.Equals(currentToken.RefreshToken));
+                                                  .FirstOrDefaultAsync(x => x.RefreshToken.Equals(tokens.RefreshToken));
 
                 if (activeInvitee == default)
                 {
-                    return Unauthorized();
+                    return Unauthorized("Invalid refresh token");
+                }
+
+                if (activeInvitee.Expiration < DateTime.Now)
+                {
+                    return Unauthorized("Expired refresh token");
                 }
 
                 var entity = await _context.GetAll<Models.Invitee>()
@@ -92,16 +141,20 @@ namespace WeddingSite.BackEnd.Controllers
 
                 var identity = new ClaimsIdentity(HttpContext.User.Claims);
 
-                var result = await GenerateCurrentToken(user, identity);
+                var appTokens = await GenerateCurrentToken(user, identity);
 
-                return Ok(result);
+                return Ok(appTokens);
 
+            }
+            catch (SecurityTokenSignatureKeyNotFoundException)
+            {
+                return Unauthorized("Invalid access token");
             }
             catch (Exception ex)
             {
                 Log.Error("Impossible to refresh the authentication token");
 
-                return BadRequest(ex);
+                return Unauthorized(ex.Message);
             }
         }
 
@@ -144,11 +197,11 @@ namespace WeddingSite.BackEnd.Controllers
             return null;
         }
 
-        private async Task<Responses.Invitee?> AuthenticateUser(CurrentUser currentUser)
+        private async Task<Responses.Invitee?> AuthenticateUser(AppLogin currentUser)
         {
             try
             {
-                var encryptionString = _config["EncryptionStrings:CryptographyString"];
+                var encryptionString = _encryption.CryptographyString;
 
                 var encryptedString = Cryptography.EncryptString(currentUser.Password, encryptionString);
 
@@ -167,48 +220,61 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        private async Task<CurrentToken> GenerateCurrentToken(Responses.Invitee user, ClaimsIdentity identity)
+        private async Task<AppTokens> GenerateCurrentToken(Responses.Invitee user, ClaimsIdentity identity)
         {
             try
             {
                 var jwtToken = GenerateToken(identity);
                 var refreshToken = await RegisterRefreshToken(user);
 
-                var token = new CurrentToken
+                #region Modifica2
+
+                //var accessExpiration = DateTime.Now.AddMinutes(_jwtParams.TokenExpirationInMinutes)
+                //                                   .AddSeconds(-10);
+
+                //var refreshExpiration = DateTime.Now.AddMonths(_jwtParams.RefreshTokenExpirationInMonths)
+                //                                    .AddMinutes(-1);
+
+                //Response.Cookies.Append("accessToken", jwtToken, new CookieOptions
+                //{
+                //    HttpOnly = true,
+                //    Expires = accessExpiration
+                //});
+
+                //Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+                //{
+                //    HttpOnly = true,
+                //    Expires = refreshExpiration
+                //});
+
+                #endregion
+
+                return new AppTokens
                 {
-                    Token = jwtToken,
+                    AccessToken = jwtToken,
                     RefreshToken = refreshToken
                 };
-
-                return token;
             }
             catch
             {
-                return new CurrentToken();
+                return new AppTokens();
             }
-
         }
 
         private string GenerateToken(ClaimsIdentity identity)
         {
             try
             {
-                var jwtKey = _config["Jwt:Key"];
-                var issuer = _config["Jwt:ValidIssuer"];
-                var audience = _config["Jwt:ValidAudience"];
-                var minutes = double.Parse(_config["Jwt:TokenExpirationInMinutes"]);
-
-                var expiration = DateTime.Now.AddMinutes(minutes);
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtParams.Key));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Issuer = issuer,
-                    Audience = audience,
+                    Issuer = _jwtParams.ValidIssuer,
+                    Audience = _jwtParams.ValidAudience,
                     Subject = identity,
-                    Expires = expiration,
+                    Expires = DateTime.Now.AddMinutes(_jwtParams.TokenExpirationInMinutes),
                     SigningCredentials = credentials,
                 };
 
@@ -236,6 +302,7 @@ namespace WeddingSite.BackEnd.Controllers
                 if (record != default)
                 {
                     record.RefreshToken = refreshToken;
+                    record.Active = DateTime.Now;
 
                     _context.Modify(record);
                 }
@@ -247,6 +314,7 @@ namespace WeddingSite.BackEnd.Controllers
                         Email = user.Email,
                         LastName = user.LastName,
                         FirstName = user.FirstName,
+                        Expiration = DateTime.Now.AddMonths(_jwtParams.RefreshTokenExpirationInMonths),
                         RefreshToken = refreshToken,
                     };
 
@@ -262,41 +330,6 @@ namespace WeddingSite.BackEnd.Controllers
                 Log.Error("Unable to update the Refresh Token");
 
                 return string.Empty;
-            }
-        }
-
-        private SecurityToken JwtTokenValidate(CurrentToken currentToken)
-        {
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-
-                var tokenParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = _config["Jwt:ValidIssuer"],
-                    ValidAudience = _config["Jwt:ValidAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"])),
-                    ClockSkew = TimeSpan.Zero
-                };
-
-                HttpContext.User = tokenHandler.ValidateToken(currentToken.Token, tokenParameters, out var securityToken);
-
-                return securityToken;
-
-            }
-            catch (SecurityTokenExpiredException ex)
-            {
-                throw new SecurityTokenExpiredException(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message);
-
-                throw new Exception(ex.Message);
             }
         }
 

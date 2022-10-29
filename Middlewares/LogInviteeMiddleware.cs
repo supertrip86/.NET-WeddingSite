@@ -1,31 +1,25 @@
-﻿using Serilog.Context;
+﻿using Microsoft.Extensions.Options;
+using Serilog.Context;
+using WeddingSite.BackEnd.Shared.Models;
 
 namespace WeddingSite.BackEnd.Middlewares
 {
     public class LogInviteeMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IConfiguration _configuration;
+        private readonly SerilogUsername _username;
 
-        public LogInviteeMiddleware(RequestDelegate next, IConfiguration configuration)
+        public LogInviteeMiddleware(RequestDelegate next, IOptions<SerilogUsername> username)
         {
             _next = next;
-            _configuration = configuration;
+            _username = username.Value;
         }
 
         public async Task Invoke(HttpContext context)
         {
-            var columnName = _configuration.GetSection("Serilog:WriteTo")
-                                           .GetChildren()
-                                           .First()
-                                           .GetSection("Args:columnOptionsSection:additionalColumns")
-                                           .GetChildren()
-                                           .First()
-                                           .GetSection("ColumnName").Value;
-
             var username = (context.User.Identity != null && context.User.Identity.IsAuthenticated) ? context.User.Identity.Name : "Anonymous";
 
-            LogContext.PushProperty(columnName, username);
+            LogContext.PushProperty(_username.ColumnName, username);
 
             await _next(context);
         }

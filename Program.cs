@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using WeddingSite.BackEnd.DAL;
 using WeddingSite.BackEnd.DAL.Mappings;
 using WeddingSite.BackEnd.Middlewares;
+using WeddingSite.BackEnd.Shared.Models;
 using WeddingSite.BackEnd.Shared.Structs;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,36 @@ try
 {
     Log.Information("Starting up");
 
+    var tokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtParameters:ValidIssuer"],
+        ValidAudience = builder.Configuration["JwtParameters:ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtParameters:Key"])),
+        ClockSkew = TimeSpan.Zero
+    };
+
+    var serilogUsername = builder.Configuration.GetSection("Serilog:WriteTo")
+                                               .GetChildren()
+                                               .First()
+                                               .GetSection("Args:columnOptionsSection:additionalColumns")
+                                               .GetChildren()
+                                               .First();
+
+    var encryptionStrings = builder.Configuration.GetSection("EncryptionStrings");
+
+    var jwtParameters = builder.Configuration.GetSection("JwtParameters");
+
     builder.Host.UseSerilog();
+
+    builder.Services.AddSingleton(tokenValidationParameters);
+
+    builder.Services.Configure<SerilogUsername>(serilogUsername);
+    builder.Services.Configure<EncryptionStrings>(encryptionStrings);
+    builder.Services.Configure<JwtParameters>(jwtParameters);
 
     builder.Services.AddAuthentication(options =>
                     {
@@ -27,17 +57,7 @@ try
                     .AddJwtBearer(options =>
                     {
                         options.SaveToken = true;
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
-                            ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-                            ClockSkew = TimeSpan.Zero
-                        };
+                        options.TokenValidationParameters = tokenValidationParameters;
                     });
 
     builder.Services.AddAuthorization(options =>

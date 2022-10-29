@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serilog;
 using WeddingSite.BackEnd.DAL;
+using WeddingSite.BackEnd.Shared.Models;
 using WeddingSite.BackEnd.Shared.Structs;
 using WeddingSite.BackEnd.Utilities;
 using Models = WeddingSite.BackEnd.DAL.Models;
@@ -15,7 +17,12 @@ namespace WeddingSite.BackEnd.Controllers
     [Route("api/[controller]")]
     public class WeddingSiteController : BaseController
     {
-        public WeddingSiteController(IMapper _mapper, IConfiguration _config, WeddingSiteDbContext _context) : base(_mapper, _config, _context) { }
+        private readonly EncryptionStrings _encryption;
+
+        public WeddingSiteController(IMapper _mapper, WeddingSiteDbContext _context, IOptions<EncryptionStrings> encryption) : base(_mapper, _context) 
+        {
+            _encryption = encryption.Value;
+        }
 
         #region GET
 
@@ -218,8 +225,8 @@ namespace WeddingSite.BackEnd.Controllers
                 }
 
                 entity.Attending = request.Attending;
-                entity.Email = string.IsNullOrEmpty(request.Email) ? entity.Email : request.Email;
                 entity.GuestsCount = request.Guests.Count;
+                entity.Email = string.IsNullOrEmpty(request.Email) ? entity.Email : request.Email;
 
                 foreach (var guest in request.Guests)
                 {
@@ -301,7 +308,7 @@ namespace WeddingSite.BackEnd.Controllers
         {
             try
             {
-                var encryptionString = _config["EncryptionStrings:CryptographyString"];
+                var encryptionString = _encryption.CryptographyString;
                 
                 foreach (var invitee in invitees)
                 {
@@ -352,6 +359,6 @@ namespace WeddingSite.BackEnd.Controllers
         }
 
         #endregion
-    
+
     }
 }

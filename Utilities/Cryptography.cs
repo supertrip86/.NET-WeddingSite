@@ -47,7 +47,6 @@ namespace WeddingSite.BackEnd.Utilities
                 using CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read);
                 using StreamReader srDecrypt = new(csDecrypt);
                 
-                // Read the decrypted bytes from the decrypting stream and place them in a string.
                 ret = srDecrypt.ReadToEnd();
             }
 
