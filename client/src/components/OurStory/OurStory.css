@@ -1,0 +1,96 @@
+/* ======= Our Story style ======= */
+
+.story .story-img {
+    position: relative;
+}
+
+.story .story-img .img {
+    padding: 0 30px 30px 15px;
+    position: relative;
+}
+
+.story .story-img .img:before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: 0;
+    left: 45px;
+    bottom: 0;
+    border: 10px solid var(--golden);
+}
+
+.story .story-img .img img {
+    position: relative;
+    z-index: 2;
+}
+
+.story .story-img:after {
+    content: '';
+    width: 90%;
+    position: absolute;
+    top: -18%;
+    bottom: -25%;
+    left: 0;
+    background-image: url(../../assets/images/OurStory/dots.png);
+    background-repeat: repeat;
+    z-index: -1;
+}
+
+.story-img-2 {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative
+}
+
+.story-img .story-img-2 {
+    width: 30% !important;
+    height: 120px;
+    position: absolute;
+    top: 15px;
+    right: 45px;
+    z-index: 3;
+}
+
+.story-wedding {
+    animation: rotation 12s infinite linear;
+    -webkit-animation: rotation 12s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .story-img .story-img-2 {
+        width: 30% !important;
+        height: 135px;
+        position: absolute;
+        top: 40px;
+        right: 45px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .story-img .story-img-2 {
+        width: 40% !important;
+        height: 120px;
+        position: absolute;
+        top: 15px;
+        right: 45px;
+    }
+}

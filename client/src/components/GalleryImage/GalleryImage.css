@@ -1,0 +1,67 @@
+/* =====  Gallery Image style  ===== */
+
+.gallery-box {
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-box .gallery-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.gallery-box .gallery-img:after {
+    content: " ";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    transition: all 0.27s cubic-bezier(0.3, 0.1, 0.58, 1);
+}
+
+.gallery-box .gallery-img>img {
+    transition: all 0.3s cubic-bezier(0.3, 0.1, 0.58, 1);
+    border-radius: 0;
+}
+
+.gallery-box .gallery-detail {
+    opacity: 0;
+    color: #FFF;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    transition: all 0.27s cubic-bezier(0.3, 0.1, 0.58, 1);
+    text-align: center;
+}
+
+.gallery-box .gallery-detail h4 {
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+}
+
+.gallery-box .gallery-detail p {
+    color: #fff;
+}
+
+.gallery-box:hover .gallery-detail {
+    top: 50%;
+    transform: translate(0, -50%);
+    opacity: 1;
+}
+
+.gallery-box:hover .gallery-img:after {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.gallery-box:hover .gallery-img>img {
+    transform: scale(1.05);
+}

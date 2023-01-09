@@ -1,0 +1,65 @@
+/* ===== Footer style ===== */
+
+.footer2 {
+    padding: 90px 30px;
+    background: var(--bgpink);
+}
+
+.footer2 img {
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+.footer2 h2,
+.footer2 h2 a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    position: relative;
+    color: #000;
+    line-height: 1em;
+    letter-spacing: 0px;
+    margin-bottom: 0;
+}
+
+.footer2 h2 a span,
+.footer2 h2 span {
+    display: block;
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    color: var(--golden);
+}
+
+.footer2 h2 a i {
+    color: #000;
+    font-size: 16px;
+    vertical-align: super;
+}
+
+.footer2 h6 {
+    color: #888;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.footer2 p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #888;
+}
+
+.footer2 .copyright {
+    color: #888;
+}
+
+@media screen and (max-width: 768px) {
+    .footer2 {
+        padding: 100px 30px 80px 30px;
+        text-align: center;
+    }
+}

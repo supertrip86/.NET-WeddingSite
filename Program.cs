@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -72,6 +73,10 @@ try
     builder.Services.AddAutoMapper(typeof(InvitationsMapping));
     builder.Services.AddAutoMapper(typeof(ActiveInviteesMapping));
 
+    builder.Services.AddSpaStaticFiles(configure => {
+        configure.RootPath = "client/build";
+    });
+
     builder.Services.AddDbContext<WeddingSiteDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
 
     builder.Services.AddControllers()
@@ -92,7 +97,18 @@ try
 
     app.MapControllers();
 
-    app.MapGet("/", () => "Web API started");
+    app.MapWhen(x => !string.IsNullOrEmpty(x.Request.Path.Value) && !x.Request.Path.Value.ToLower().StartsWith("/api"), build =>
+    {
+        build.UseSpa(spa =>
+        {
+            spa.Options.SourcePath = "client";
+
+            if (builder.Environment.IsDevelopment())
+            {
+                spa.UseReactDevelopmentServer(npmScript: "start");
+            }
+        });
+    });
 
     app.Run();
 }
