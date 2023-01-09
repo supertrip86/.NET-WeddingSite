@@ -76,7 +76,7 @@ namespace WeddingSite.BackEnd.Controllers
             {
                 Log.Error("Authentication failed");
 
-                return BadRequest(ex);
+                return Unauthorized(ex.Message);
             }
         }
 
@@ -148,6 +148,8 @@ namespace WeddingSite.BackEnd.Controllers
             }
             catch (SecurityTokenSignatureKeyNotFoundException)
             {
+                Log.Error("An invalid access token has been provided");
+
                 return Unauthorized("Invalid access token");
             }
             catch (Exception ex)
@@ -228,6 +230,8 @@ namespace WeddingSite.BackEnd.Controllers
                 var refreshToken = await RegisterRefreshToken(user);
 
                 #region Modifica2
+
+                // !!! check what happens if jwtToken || refreshToken is null or empty when setting cookie !!!
 
                 //var accessExpiration = DateTime.Now.AddMinutes(_jwtParams.TokenExpirationInMinutes)
                 //                                   .AddSeconds(-10);
