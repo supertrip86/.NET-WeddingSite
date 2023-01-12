@@ -75,13 +75,14 @@ namespace WeddingSite.BackEnd.Controllers
 
         [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
-        [Route("[action]")]
+        [Route("[action]/{id}")]
         public async Task<IActionResult> GetInvitationById(int id)
         {
             try
             {
                 var result = await _context.GetAll<Models.Invitee>()
                                            .Include(x => x.Guests)
+                                           .Include(x => x.ActiveInvitee)
                                            .FirstOrDefaultAsync(x => x.InvitationId.Equals(id));
 
                 if (result == default)
@@ -181,7 +182,7 @@ namespace WeddingSite.BackEnd.Controllers
 
         [Authorize(Policy = Policies.Authorized)]
         [HttpGet]
-        [Route("[action]")]
+        [Route("[action]/{id}")]
         public async Task<IActionResult> GetGuestById(int id)
         {
             try
@@ -195,6 +196,32 @@ namespace WeddingSite.BackEnd.Controllers
                 }
 
                 var response = _mapper.Map<Responses.Guest>(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [Authorize(Policy = Policies.Authorized)]
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> GetGuestsByInvitationId(int id)
+        {
+            try
+            {
+                var result = await _context.GetAll<Models.Guest>()
+                                           .Where(x => x.InvitationRefId.Equals(id))
+                                           .ToListAsync();
+
+                if (result == default)
+                {
+                    return NotFound("No guests have been found");
+                }
+
+                var response = _mapper.Map<List<Responses.Guest>>(result);
 
                 return Ok(result);
             }

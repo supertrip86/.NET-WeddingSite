@@ -26,12 +26,12 @@
 }
 
 .bridegroom .info h6 i {
-    color: var(--golden);
+    color: var(--main);
     font-size: 16px;
 }
 
 .bridegroom .info span {
-    color: var(--golden);
+    color: var(--main);
     font-size: 24px;
     font-weight: 400;
     font-family: 'Alex Brush', cursive;
@@ -58,8 +58,8 @@
 }
 
 .bridegroom .info .social a:hover {
-    background-color: var(--golden);
-    border-color: var(--golden);
+    background-color: var(--main);
+    border-color: var(--main);
     color: #fff;
 }
 

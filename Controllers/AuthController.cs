@@ -65,6 +65,8 @@ namespace WeddingSite.BackEnd.Controllers
 
                 var tokens = await GenerateCurrentToken(user, new ClaimsIdentity(claims));
 
+                tokens.InvitationId= user.InvitationId;
+
                 HttpContext.User = new JwtSecurityTokenHandler().ValidateToken(tokens.AccessToken, _tokenValidationParameters, out var _);
 
                 Log.Information($"{user.FirstName} {user.LastName} has been authenticated");
@@ -135,15 +137,15 @@ namespace WeddingSite.BackEnd.Controllers
                 }
 
                 var entity = await _context.GetAll<Models.Invitee>()
-                                           .FirstOrDefaultAsync(x => x.Email.Equals(activeInvitee.Email));
+                                           .FirstOrDefaultAsync(x => x.Email.Trim().ToLower().Equals(activeInvitee.Email.Trim().ToLower()));
 
                 var user = _mapper.Map<Responses.Invitee>(entity);
 
                 var identity = new ClaimsIdentity(HttpContext.User.Claims);
 
-                var appTokens = await GenerateCurrentToken(user, identity);
+                var newTokens = await GenerateCurrentToken(user, identity);
 
-                return Ok(appTokens);
+                return Ok(newTokens);
 
             }
             catch (SecurityTokenSignatureKeyNotFoundException)
@@ -203,12 +205,19 @@ namespace WeddingSite.BackEnd.Controllers
         {
             try
             {
-                var encryptionString = _encryption.CryptographyString;
+                #region Modifica3
 
-                var encryptedString = Cryptography.EncryptString(currentUser.Password, encryptionString);
+                //var encryptionString = _encryption.CryptographyString;
+
+                //var encryptedString = Cryptography.EncryptString(currentUser.Password, encryptionString);
+
+                //var entity = await _context.GetAll<Models.Invitee>()
+                //                           .FirstOrDefaultAsync(x => x.Password.Equals(encryptedString) && x.Email.Equals(currentUser.Email));
+
+                #endregion
 
                 var entity = await _context.GetAll<Models.Invitee>()
-                                           .FirstOrDefaultAsync(x => x.Password.Equals(encryptedString));
+                                           .FirstOrDefaultAsync(x => x.Email.Trim().ToLower().Equals(currentUser.Email.Trim().ToLower()));
 
                 var result = _mapper.Map<Responses.Invitee>(entity);
 
@@ -256,7 +265,8 @@ namespace WeddingSite.BackEnd.Controllers
                 return new AppTokens
                 {
                     AccessToken = jwtToken,
-                    RefreshToken = refreshToken
+                    RefreshToken = refreshToken,
+                    InvitationId = user.InvitationId
                 };
             }
             catch
@@ -299,7 +309,7 @@ namespace WeddingSite.BackEnd.Controllers
             try
             {
                 var record = await _context.GetAll<Models.ActiveInvitee>()
-                                           .FirstOrDefaultAsync(x => x.Email.Equals(user.Email));
+                                           .FirstOrDefaultAsync(x => x.Email.Trim().ToLower().Equals(user.Email.Trim().ToLower()));
 
                 var refreshToken = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
 

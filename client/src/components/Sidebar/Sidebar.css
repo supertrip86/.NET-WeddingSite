@@ -23,12 +23,6 @@
     scrollbar-width: none;
 }
 
-@media screen and (max-width: 1200px) {
-    #wedding-aside {
-        width: 30%;
-    }
-}
-
 @media screen and (max-width: 768px) {
     #wedding-aside {
         width: 270px;
@@ -94,7 +88,7 @@
 #wedding-aside .wedding-logo a span {
     display: block;
     font-size: 36px;
-    color: var(--golden);
+    color: var(--main);
     font-family: 'Alex Brush', cursive;
     font-weight: 400;
     display: block;
@@ -145,7 +139,7 @@
 }
 
 #wedding-aside .wedding-main-menu ul li a:hover {
-    border-bottom: 1px solid var(--golden);
+    border-bottom: 1px solid var(--main);
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out
 }
@@ -182,7 +176,7 @@
 }
 
 #wedding-aside .footer1 a {
-    color: var(--golden);
+    color: var(--main);
 }
 
 #wedding-aside .separator {

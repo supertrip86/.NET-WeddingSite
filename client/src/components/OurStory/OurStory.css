@@ -16,7 +16,7 @@
     right: 0;
     left: 45px;
     bottom: 0;
-    border: 10px solid var(--golden);
+    border: 10px solid var(--main);
 }
 
 .story .story-img .img img {

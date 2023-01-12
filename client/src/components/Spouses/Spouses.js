@@ -20,7 +20,7 @@ const Spouses = ({ couple, location, weddingDate }) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
-                            <div className="item toright mb-30">
+                            <div className="item toright">
                                 <div className="img"> <img src={Bride} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
@@ -30,7 +30,7 @@ const Spouses = ({ couple, location, weddingDate }) => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div className="item mb-30">
+                            <div className="item">
                                 <div className="img"> <img src={Groom} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
@@ -43,6 +43,9 @@ const Spouses = ({ couple, location, weddingDate }) => {
                     <div className="pt-3 pb-3 text-center">
                         <h3 className="wedding-couple-title">Are getting married!</h3>
                         <h4 className="font-weight-light">{monthCapitalized} {day}, {year} – {location.city}, {location.area}</h4>
+                    </div>
+                    <div className="pt-3 pb-3 text-center">
+                        <h4 className="font-weight-light">No formal dressing code is required, you are encouraged to come as you are</h4>
                     </div>
                     <Counter
                         days={days}

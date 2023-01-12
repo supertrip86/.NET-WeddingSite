@@ -10,22 +10,7 @@ import RSVP from "./RSVP/RSVP";
 import Footer from './Footer/Footer';
 import Gifts from "./Gifts/Gifts";
 
-import React, { useEffect } from 'react'
-import axios from "axios";
-
-function App() {
-
-    useEffect(() => {
-        const isLoggedIn = async () => {
-            const response = await axios.post("/api/auth/Login", {
-                password: "asdasd"
-            });
-
-            console.log(response.data)
-        }
-
-        isLoggedIn();
-    }, []);
+const App = () => {
 
     const couple = {
         bride: "Noelle",
@@ -59,6 +44,8 @@ function App() {
         }
     };
 
+    const menus = ["Vegetarian", "Vegan", "Gluten Free", "Normal (Fish)"];
+
     const weddingDate = "Jul 01, 2023 18:00:00";
 
     return (
@@ -68,7 +55,7 @@ function App() {
                 <Header couple={couple} location={location} weddingDate={weddingDate} />
                 <Spouses couple={couple} location={location} weddingDate={weddingDate} />
                 <WhenWhere location={location} hotel={hotel} />
-                <RSVP />
+                <RSVP menus={menus} />
                 <Counter targetDate={weddingDate} />
                 <OurStory />
                 <Gallery />

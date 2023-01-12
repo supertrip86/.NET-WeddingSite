@@ -13,7 +13,7 @@
 .gallery-menu span.active,
 .gallery-menu span:hover {
     color: #fff !important;
-    background-color: var(--golden);
+    background-color: var(--main);
 }
 
 .gallery-item {

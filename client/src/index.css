@@ -1,8 +1,8 @@
 /* ===== Default style ===== */
 
 :root {
-    --golden: #BD945A;
-    /* --golden: #6f6f6f; */
+    --main: #BD945A;
+    /* --main: #6f6f6f; */
     --bgpink: #FAF8F7;
 }
 
@@ -20,6 +20,16 @@ body {
     font-weight: 400;
     line-height: 1.75em;
     color: #888;
+}
+
+.btn-info, .btn-info:hover {
+    background-color: gray !important;
+    border-color: gray !important;
+}
+
+.btn-primary, .switch-group .btn-primary:hover, .switch-group .btn-primary:active {
+    background-color: var(--main) !important;
+    border-color: gray !important;
 }
 
 /*** typography ***/
@@ -177,8 +187,8 @@ input[type="reset"],
 input[type="button"],
 button {
     font-family: 'Nunito Sans', sans-serif;
-    background: var(--golden);
-    border: 1px solid var(--golden);
+    background: var(--main);
+    border: 1px solid var(--main);
     color: #fff;
     padding: 15px 30px;
     margin: 0;
@@ -254,7 +264,7 @@ input[type=checkbox]:before {
 input[type=checkbox]:after {
     font-family: 'themify';
     content: '\e64c';
-    color: var(--golden);
+    color: var(--main);
     background: transparent;
     position: absolute;
     top: 1px;
@@ -301,7 +311,7 @@ input[type=radio]:before {
     display: inline-block;
     top: 0px;
     left: -4px;
-    background-image: radial-gradient(circle, var(--golden) 50%, #fff 70%);
+    background-image: radial-gradient(circle, var(--main) 50%, #fff 70%);
     background-size: 0;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -325,22 +335,15 @@ input[type=radio]:checked:before {
 }
 
 .form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     background: transparent;
-    border: none;
-    border-bottom: 0px solid #e5e5e5;
-    height: 54px;
+    border: 1px solid #ececec;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     border-radius: 0;
-    padding: 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    padding: 04px;
     line-height: 1.75em;
     font-weight: 400;
 }
@@ -486,7 +489,7 @@ input[type=radio]:checked:before {
     font-family: 'Alex Brush', cursive;
     font-weight: 400;
     font-size: 30px;
-    color: var(--golden);
+    color: var(--main);
     line-height: 1.25em;
     margin-bottom: 10px;
 }
@@ -498,7 +501,7 @@ input[type=radio]:checked:before {
     font-family: 'Alex Brush', cursive;
     font-weight: 400;
     font-size: 60px;
-    color: var(--golden);
+    color: var(--main);
     /* line-height: 1.5em; */
     margin-bottom: 5px;
 }
@@ -518,16 +521,12 @@ input[type=radio]:checked:before {
     font-family: 'Alex Brush', cursive;
     font-weight: 400;
     font-size: 30px;
-    color: var(--golden);
+    color: var(--main);
     line-height: 1.5em;
     margin-bottom: 10px;
 }
 
 /* =====  Button style  ===== */
-
-.btn {
-    padding: 0;
-}
 
 .buttono {
     position: relative;
@@ -536,8 +535,8 @@ input[type=radio]:checked:before {
 
 .buttono a {
     font-family: 'Nunito Sans', sans-serif;
-    background: var(--golden);
-    border: 1px solid var(--golden);
+    background: var(--main);
+    border: 1px solid var(--main);
     color: #fff;
     padding: 10px 20px;
     margin: 0;
@@ -590,11 +589,11 @@ input[type=radio]:checked:before {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--golden);
+    background: var(--main);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--golden);
+    background: var(--main);
 }
 
 /* ==== Media Query ==== */
