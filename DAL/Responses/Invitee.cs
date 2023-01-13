@@ -18,6 +18,10 @@ namespace WeddingSite.BackEnd.DAL.Responses
 
         public bool Attending { get; set; } = false;
 
+        public string Welcome { get; set; } = string.Empty;
+
+        public string Note { get; set; } = string.Empty;
+
         public string Role { get; set; } = "Invitee";
 
         public int GuestsCount { get; set; } = 0;

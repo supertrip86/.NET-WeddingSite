@@ -11,6 +11,8 @@ namespace WeddingSite.BackEnd.DAL.Responses
 
         public string FirstName { get; set; } = string.Empty;
 
+        public bool Attending { get; set; }
+
         public string ChosenMenu { get; set; } = string.Empty;
 
         public string Allergies { get; set; } = string.Empty;

@@ -23,6 +23,10 @@ namespace WeddingSite.BackEnd.DAL.Models
         [Column("FirstName")]
         public string FirstName { get; set; } = string.Empty;
 
+        [Required]
+        [Column("Attending")]
+        public bool Attending { get; set; }
+
         [StringLength(50)]
         [DataType(DataType.Text)]
         [Column("ChosenMenu")]

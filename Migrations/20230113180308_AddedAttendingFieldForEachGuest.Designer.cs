@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingSite.BackEnd.DAL;
 
@@ -11,9 +12,10 @@ using WeddingSite.BackEnd.DAL;
 namespace WeddingSite.BackEnd.Migrations
 {
     [DbContext(typeof(WeddingSiteDbContext))]
-    partial class WeddingSiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230113180308_AddedAttendingFieldForEachGuest")]
+    partial class AddedAttendingFieldForEachGuest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,12 +174,6 @@ namespace WeddingSite.BackEnd.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("LastName");
 
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("Note");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -188,12 +184,6 @@ namespace WeddingSite.BackEnd.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Role");
-
-                    b.Property<string>("Welcome")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("Welcome");
 
                     b.HasKey("InvitationId");
 

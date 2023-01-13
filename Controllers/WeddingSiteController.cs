@@ -252,6 +252,7 @@ namespace WeddingSite.BackEnd.Controllers
                 }
 
                 entity.Attending = request.Attending;
+                entity.Note = request.Note;
                 entity.GuestsCount = request.Guests.Count;
                 entity.Email = string.IsNullOrEmpty(request.Email) ? entity.Email : request.Email;
 
@@ -267,6 +268,7 @@ namespace WeddingSite.BackEnd.Controllers
                     }
                     else
                     {
+                        target.Attending = guest.Attending;
                         target.ChosenMenu = guest.ChosenMenu;
                         target.Allergies = guest.Allergies;
                         target.Intolerances = guest.Intolerances;
@@ -290,7 +292,7 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
-        [Authorize(Policy = Policies.Admin)]
+        [Authorize(Policy = Policies.Authorized)]
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateGuest([FromBody] Responses.Guest request)

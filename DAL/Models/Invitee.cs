@@ -38,6 +38,16 @@ namespace WeddingSite.BackEnd.DAL.Models
         [Column("Attending")]
         public bool Attending { get; set; }
 
+        [StringLength(500)]
+        [DataType(DataType.Text)]
+        [Column("Welcome")]
+        public string Welcome { get; set; } = string.Empty;
+
+        [StringLength(500)]
+        [DataType(DataType.Text)]
+        [Column("Note")]
+        public string Note { get; set; } = string.Empty;
+
         [Required]
         [StringLength(100)]
         [DataType(DataType.Text)]
