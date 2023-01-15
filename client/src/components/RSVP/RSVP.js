@@ -1,9 +1,11 @@
 import './RSVP.css';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { TailSpin } from 'react-loader-spinner';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import axiosPrivate from '../../api/axios';
 
 const RSVP = ({ menus }) => {
+    const [loaded, setLoaded] = useState(false);
     const [invitation, setInvitation] = useState({});
     const [guests, setGuests] = useState([]);
     const [note, setNote] = useState("");
@@ -25,6 +27,7 @@ const RSVP = ({ menus }) => {
                 setInvitation(result.data);
                 setGuests(result.data.guests);
                 setNote(result.data.note);
+                setLoaded(true);
             }
         }
     }
@@ -60,10 +63,13 @@ const RSVP = ({ menus }) => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(invitation);
+
+        setLoaded(false);
+
         await updateInvitation(invitation);
 
         setSubmitted(true);
+        setLoaded(true);
     }
 
     const onClickRemoveGuest = async (e, guestId) => {
@@ -116,34 +122,34 @@ const RSVP = ({ menus }) => {
         <div id='rsvp' className='section-padding bg-img bg-fixed'>
             <div className='container'>
                 {
-                    (invitation.firstName) ? (
-                        <>
-                            <div className='row justify-content-center'>
-                                <div className='col-md-6 text-center'>
-                                    <h3>Hi {invitation.firstName}!</h3>
+                    loaded ? (
+                        (invitation.firstName) ? (
+                            <>
+                                <div className='row justify-content-center'>
+                                    <div className='col-md-6 text-center'>
+                                        <h3>Hi {invitation.firstName}!</h3>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='row justify-content-center'>
-                                {
-                                    submitted ? (
-                                        <div className='text-center'>
-                                            <h2 className='wedding-title my-5'>Thank you for letting us know!</h2>
-                                            <h4 className='font-weight-light'>Feel free to come back to this page anytime you want to make a change with your reservation</h4>
-                                        </div>
-                                    ) : (
-                                        <div className='col-md-12'>
-                                            <div className="mb-5">
-                                                <span className='wedding-title-meta text-center'>Will you attend?</span>
-                                                <h2 className='wedding-title text-center'>R.S.V.P</h2>
+                                <div className='row justify-content-center'>
+                                    {
+                                        submitted ? (
+                                            <div className='text-center'>
+                                                <h2 className='wedding-title my-5'>Thank you for letting us know!</h2>
+                                                <h4 className='font-weight-light'>Feel free to come back to this page anytime you want to make a change with your reservation</h4>
                                             </div>
-                                            <form onSubmit={onSubmitHandler}>
-                                                {
-                                                    guests.map((guest, index) => {
-                                                        return (
-                                                            <div key={guest.guestId} className='d-md-flex mb-3'>
-                                                                {
-                                                                    guest.isPlusOne ? (
-                                                                        <>
+                                        ) : (
+                                            <div className='col-md-12'>
+                                                <div className="mb-5">
+                                                    <span className='wedding-title-meta text-center'>Will you attend?</span>
+                                                    <h2 className='wedding-title text-center'>R.S.V.P</h2>
+                                                </div>
+                                                <form onSubmit={onSubmitHandler}>
+                                                    {
+                                                        guests.map((guest, index) => {
+                                                            return (
+                                                                <div key={guest.guestId} className='d-md-flex mb-3'>
+                                                                    {
+                                                                        guest.isPlusOne ? (
                                                                             <div className="col d-flex p-1 m-auto">
                                                                                 <input
                                                                                     autoComplete="off"
@@ -153,6 +159,9 @@ const RSVP = ({ menus }) => {
                                                                                     type="text"
                                                                                     className='form-control my-2'
                                                                                     placeholder='First Name'
+                                                                                    onInvalid={e => e.target.setCustomValidity('Enter First Name')}
+                                                                                    onInput={e => e.target.setCustomValidity('')}
+                                                                                    required
                                                                                 />
                                                                                 <input
                                                                                     autoComplete="off"
@@ -162,46 +171,55 @@ const RSVP = ({ menus }) => {
                                                                                     type="text"
                                                                                     className='form-control my-2'
                                                                                     placeholder='Last Name'
+                                                                                    onInvalid={e => e.target.setCustomValidity('Enter Last Name')}
+                                                                                    onInput={e => e.target.setCustomValidity('')}
+                                                                                    required
                                                                                 />
                                                                             </div>
-                                                                            <div className="col-xs col-md-2 p-1 m-auto">
-                                                                                <select
-                                                                                    value={guest.chosenMenu}
-                                                                                    name="chosenMenu"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    className="form-control my-2"
-                                                                                >
-                                                                                    {
-                                                                                        menus.map((menu, i) => {
-                                                                                            return (
-                                                                                                <option key={i} value={menu}>{menu}</option>
-                                                                                            )
-                                                                                        })
-                                                                                    }
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className="col p-1 m-auto">
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.allergies}
-                                                                                    name="allergies"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type='text'
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='Allergies'
-                                                                                />
-                                                                            </div>
-                                                                            <div className="col p-1 m-auto">
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.intolerances}
-                                                                                    name="intolerances"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type='text'
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='Intolerances'
-                                                                                />
-                                                                            </div>
+                                                                        ) : (
+                                                                            <div className="col p-1 m-auto">{guest.firstName} {guest.lastName}</div>
+                                                                        )
+                                                                    }
+                                                                    <div className="col-xs col-md-2 p-1 m-auto">
+                                                                        <select
+                                                                            value={guest.chosenMenu}
+                                                                            name="chosenMenu"
+                                                                            onChange={e => onChangeHandler(e, index)}
+                                                                            className="form-control my-2"
+                                                                        >
+                                                                            {
+                                                                                menus.map((menu, i) => {
+                                                                                    return (
+                                                                                        <option key={i} value={menu}>{menu}</option>
+                                                                                    )
+                                                                                })
+                                                                            }
+                                                                        </select>
+                                                                    </div>
+                                                                    <div className="col p-1 m-auto">
+                                                                        <input
+                                                                            autoComplete="off"
+                                                                            value={guest.allergies}
+                                                                            name="allergies"
+                                                                            onChange={e => onChangeHandler(e, index)}
+                                                                            type='text'
+                                                                            className='form-control my-2'
+                                                                            placeholder='Allergies'
+                                                                        />
+                                                                    </div>
+                                                                    <div className="col p-1 m-auto">
+                                                                        <input
+                                                                            autoComplete="off"
+                                                                            value={guest.intolerances}
+                                                                            name="intolerances"
+                                                                            onChange={e => onChangeHandler(e, index)}
+                                                                            type='text'
+                                                                            className='form-control my-2'
+                                                                            placeholder='Intolerances'
+                                                                        />
+                                                                    </div>
+                                                                    {
+                                                                        guest.isPlusOne ? (
                                                                             <div className="col-1 p-1 m-auto">
                                                                                 <button
                                                                                     type="button"
@@ -209,48 +227,7 @@ const RSVP = ({ menus }) => {
                                                                                     onClick={e => onClickRemoveGuest(e, guest.guestId)}
                                                                                 >Remove</button>
                                                                             </div>
-                                                                        </>
-                                                                    ) : (
-                                                                        <>
-                                                                            <div className="col p-1 m-auto">{guest.firstName} {guest.lastName}</div>
-                                                                            <div className="col-xs col-md-2 p-1 m-auto">
-                                                                                <select
-                                                                                    value={guest.chosenMenu}
-                                                                                    name="chosenMenu"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    className="form-control my-2"
-                                                                                >
-                                                                                    {
-                                                                                        menus.map((menu, i) => {
-                                                                                            return (
-                                                                                                <option key={i} value={menu}>{menu}</option>
-                                                                                            )
-                                                                                        })
-                                                                                    }
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className="col p-1 m-auto">
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.allergies}
-                                                                                    name="allergies"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type='text'
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='Allergies'
-                                                                                />
-                                                                            </div>
-                                                                            <div className="col p-1 m-auto">
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.intolerances}
-                                                                                    name="intolerances"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type='text'
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='Intolerances'
-                                                                                />
-                                                                            </div>
+                                                                        ) : (
                                                                             <div className="col-1 text-center p-1 m-auto">
                                                                                 <BootstrapSwitchButton
                                                                                     checked={guest.attending}
@@ -262,36 +239,50 @@ const RSVP = ({ menus }) => {
                                                                                     onChange={checked => guest.attending = checked}
                                                                                 />
                                                                             </div>
-                                                                        </>
-                                                                    )
-                                                                }
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                                <div className="text-right py-3">
-                                                    <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Click to add more guests</button>
-                                                </div>
-                                                <div className="mt-3">
-                                                    <textarea value={note} onChange={onChangeNoteHandler} placeholder="Notes"></textarea>
-                                                </div>
-                                                <div className="mt-4">
-                                                    <input type='submit' className='btn buttono' value='SEND' />
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                    )
-                                }
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                    <div className="text-right py-3">
+                                                        <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Click to add more guests</button>
+                                                    </div>
+                                                    <div className="mt-3">
+                                                        <textarea value={note} onChange={onChangeNoteHandler} placeholder="Notes"></textarea>
+                                                    </div>
+                                                    <div className="mt-4">
+                                                        <input type='submit' className='btn buttono' value='SEND' />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            </>
+                        ) : (
+                            <div className='row justify-content-center'>
+                                <div className='col-md-6 p-40'>
+                                    <form onSubmit={onLoginHandler}>
+                                        <input type="text" />
+                                        <button type="submit">Enter your email</button>
+                                    </form>
+                                </div>
                             </div>
-                        </>
+                        )
                     ) : (
                         <div className='row justify-content-center'>
-                            <div className='col-md-6 p-40'>
-                                <form onSubmit={onLoginHandler}>
-                                    <input type="text" />
-                                    <button type="submit">Enter your email</button>
-                                </form>
+                            <div className='col-md-6 text-center'>
+                                <TailSpin
+                                    height="80"
+                                    width="80"
+                                    color="var(--main)"
+                                    ariaLabel="tail-spin-loading"
+                                    radius="1"
+                                    wrapperStyle={{}}
+                                    wrapperClass="justify-content-center"
+                                    visible={true}
+                                />
                             </div>
                         </div>
                     )
