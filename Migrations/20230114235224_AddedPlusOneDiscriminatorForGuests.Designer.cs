@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingSite.BackEnd.DAL;
 
@@ -11,9 +12,10 @@ using WeddingSite.BackEnd.DAL;
 namespace WeddingSite.BackEnd.Migrations
 {
     [DbContext(typeof(WeddingSiteDbContext))]
-    partial class WeddingSiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230114235224_AddedPlusOneDiscriminatorForGuests")]
+    partial class AddedPlusOneDiscriminatorForGuests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

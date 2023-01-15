@@ -256,23 +256,29 @@ namespace WeddingSite.BackEnd.Controllers
                 entity.GuestsCount = request.Guests.Count;
                 entity.Email = string.IsNullOrEmpty(request.Email) ? entity.Email : request.Email;
 
+                foreach (var guest in entity.Guests)
+                {
+                    if (!request.Guests.Any(c => c.GuestId.Equals(guest.GuestId)))
+                    {
+                        _context.Delete(guest);
+                    }
+                }
+
                 foreach (var guest in request.Guests)
                 {
-                    var target = entity.Guests.FirstOrDefault(x => x.LastName.Equals(guest.LastName) && x.FirstName.Equals(guest.FirstName));
+                    var target = entity.Guests.FirstOrDefault(x => x.GuestId.Equals(guest.GuestId));
 
                     if (target == default)
                     {
+                        guest.GuestId = 0;
+
                         var newGuest = _mapper.Map<Models.Guest>(guest);
 
                         entity.Guests.Add(newGuest);
                     }
                     else
                     {
-                        target.Attending = guest.Attending;
-                        target.ChosenMenu = guest.ChosenMenu;
-                        target.Allergies = guest.Allergies;
-                        target.Intolerances = guest.Intolerances;
-                        target.Note = guest.Note;
+                        _context.Entry(target).CurrentValues.SetValues(guest);
                     }
                 }
 

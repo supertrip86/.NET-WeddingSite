@@ -53,17 +53,45 @@ const RSVP = ({ menus }) => {
         setInvitation({ ...invitation, guests: edits })
     }
 
-    const onChangeNoteHandler = (e) => {
+    const onChangeNoteHandler = async (e) => {
         setNote(e.target.value)
-        setInvitation({ ...invitation, note: note })
+        setInvitation({ ...invitation, note: e.target.value })
     }
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-
+        console.log(invitation);
         await updateInvitation(invitation);
 
         setSubmitted(true);
+    }
+
+    const onClickRemoveGuest = async (e, guestId) => {
+        const edits = [...guests].filter(guest => guest.guestId != guestId);
+
+        setGuests(edits);
+        setInvitation({ ...invitation, guests: edits })
+    }
+
+    const onClickAdd = () => {
+        const id = invitation.invitationId;
+
+        const edits = [...guests, {
+            invitationRefId: id,
+            lastName: '',
+            firstName: '',
+            invitation: null,
+            attending: true,
+            isPlusOne: true,
+            chosenMenu: 'Vegetarian',
+            allergies: '',
+            intolerances: '',
+            note: '',
+            guestId: parseInt(Date.now().toString().slice(-6))
+        }];
+
+        setGuests(edits);
+        setInvitation({ ...invitation, guests: edits });
     }
 
     useEffect(() => {
@@ -112,60 +140,139 @@ const RSVP = ({ menus }) => {
                                                 {
                                                     guests.map((guest, index) => {
                                                         return (
-                                                            <div key={index} className='d-md-flex mb-3'>
-                                                                <div className="col m-auto">{guest.firstName} {guest.lastName}</div>
-                                                                <div className="col m-auto">
-                                                                    <select
-                                                                        value={guest.chosenMenu}
-                                                                        name="chosenMenu"
-                                                                        onChange={e => onChangeHandler(e, index)}
-                                                                        className="form-control my-2"
-                                                                    >
-                                                                        {
-                                                                            menus.map((menu, i) => {
-                                                                                return (
-                                                                                    <option key={i} value={menu}>{menu}</option>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                                <div className="col m-auto">
-                                                                    <input
-                                                                        value={guest.allergies}
-                                                                        name="allergies"
-                                                                        onChange={e => onChangeHandler(e, index)}
-                                                                        type='text'
-                                                                        className='form-control my-2'
-                                                                        placeholder='Allergies'
-                                                                    />
-                                                                </div>
-                                                                <div className="col m-auto">
-                                                                    <input
-                                                                        value={guest.intolerances}
-                                                                        name="intolerances"
-                                                                        onChange={e => onChangeHandler(e, index)}
-                                                                        type='text'
-                                                                        className='form-control my-2'
-                                                                        placeholder='Intolerances'
-                                                                    />
-                                                                </div>
-                                                                <div className="col m-auto">
-                                                                    <BootstrapSwitchButton
-                                                                        checked={guest.attending}
-                                                                        name="attending"
-                                                                        onstyle="primary"
-                                                                        offstyle="info"
-                                                                        onlabel="Yes"
-                                                                        offlabel="No"
-                                                                        onChange={checked => guest.attending = checked}
-                                                                    />
-                                                                </div>
+                                                            <div key={guest.guestId} className='d-md-flex mb-3'>
+                                                                {
+                                                                    guest.isPlusOne ? (
+                                                                        <>
+                                                                            <div className="col d-flex p-1 m-auto">
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.firstName}
+                                                                                    name="firstName"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type="text"
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='First Name'
+                                                                                />
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.lastName}
+                                                                                    name="lastName"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type="text"
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='Last Name'
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col-xs col-md-2 p-1 m-auto">
+                                                                                <select
+                                                                                    value={guest.chosenMenu}
+                                                                                    name="chosenMenu"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    className="form-control my-2"
+                                                                                >
+                                                                                    {
+                                                                                        menus.map((menu, i) => {
+                                                                                            return (
+                                                                                                <option key={i} value={menu}>{menu}</option>
+                                                                                            )
+                                                                                        })
+                                                                                    }
+                                                                                </select>
+                                                                            </div>
+                                                                            <div className="col p-1 m-auto">
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.allergies}
+                                                                                    name="allergies"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type='text'
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='Allergies'
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col p-1 m-auto">
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.intolerances}
+                                                                                    name="intolerances"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type='text'
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='Intolerances'
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col-1 p-1 m-auto">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className='btn btn-primary btn-rsvp'
+                                                                                    onClick={e => onClickRemoveGuest(e, guest.guestId)}
+                                                                                >Remove</button>
+                                                                            </div>
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <div className="col p-1 m-auto">{guest.firstName} {guest.lastName}</div>
+                                                                            <div className="col-xs col-md-2 p-1 m-auto">
+                                                                                <select
+                                                                                    value={guest.chosenMenu}
+                                                                                    name="chosenMenu"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    className="form-control my-2"
+                                                                                >
+                                                                                    {
+                                                                                        menus.map((menu, i) => {
+                                                                                            return (
+                                                                                                <option key={i} value={menu}>{menu}</option>
+                                                                                            )
+                                                                                        })
+                                                                                    }
+                                                                                </select>
+                                                                            </div>
+                                                                            <div className="col p-1 m-auto">
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.allergies}
+                                                                                    name="allergies"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type='text'
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='Allergies'
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col p-1 m-auto">
+                                                                                <input
+                                                                                    autoComplete="off"
+                                                                                    value={guest.intolerances}
+                                                                                    name="intolerances"
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    type='text'
+                                                                                    className='form-control my-2'
+                                                                                    placeholder='Intolerances'
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col-1 text-center p-1 m-auto">
+                                                                                <BootstrapSwitchButton
+                                                                                    checked={guest.attending}
+                                                                                    name="attending"
+                                                                                    onstyle="primary"
+                                                                                    offstyle="info"
+                                                                                    onlabel="Yes"
+                                                                                    offlabel="No"
+                                                                                    onChange={checked => guest.attending = checked}
+                                                                                />
+                                                                            </div>
+                                                                        </>
+                                                                    )
+                                                                }
                                                             </div>
                                                         )
                                                     })
                                                 }
-                                                <div>
+                                                <div className="text-right py-3">
+                                                    <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Click to add more guests</button>
+                                                </div>
+                                                <div className="mt-3">
                                                     <textarea value={note} onChange={onChangeNoteHandler} placeholder="Notes"></textarea>
                                                 </div>
                                                 <div className="mt-4">
@@ -189,8 +296,8 @@ const RSVP = ({ menus }) => {
                         </div>
                     )
                 }
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

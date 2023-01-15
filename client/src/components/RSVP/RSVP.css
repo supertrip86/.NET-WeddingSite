@@ -1,2 +1,9 @@
 /* ===== RSVP style ===== */
 
+.btn-rsvp {
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+    padding: 10px;
+}
+

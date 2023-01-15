@@ -24,6 +24,10 @@ namespace WeddingSite.BackEnd.DAL.Models
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
+        [Column("IsPlusOne")]
+        public bool IsPlusOne { get; set; }
+
+        [Required]
         [Column("Attending")]
         public bool Attending { get; set; }
 
