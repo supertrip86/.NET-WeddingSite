@@ -87,6 +87,8 @@ try
 
     var app = builder.Build();
 
+    app.UseSpaStaticFiles(new StaticFileOptions { RequestPath = "/client/build" });
+
     app.UseAuthentication();
 
     app.UseMiddleware<LogInviteeMiddleware>();

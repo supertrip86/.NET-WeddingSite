@@ -27,15 +27,18 @@ const RSVP = ({ menus }) => {
                 setInvitation(result.data);
                 setGuests(result.data.guests);
                 setNote(result.data.note);
-                setLoaded(true);
             }
         }
+
+        setLoaded(true);
     }
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
 
         const email = e.target.querySelector("input").value;
+
+        setLoaded(false);
 
         const loginResult = await login({
             email: email
@@ -73,7 +76,7 @@ const RSVP = ({ menus }) => {
     }
 
     const onClickRemoveGuest = async (e, guestId) => {
-        const edits = [...guests].filter(guest => guest.guestId != guestId);
+        const edits = [...guests].filter(guest => guest.guestId !== guestId);
 
         setGuests(edits);
         setInvitation({ ...invitation, guests: edits })
@@ -105,6 +108,7 @@ const RSVP = ({ menus }) => {
         const accessToken = window.localStorage.getItem("accessToken");
 
         if (refreshToken && accessToken) {
+
             const refresh = async () => {
                 const refreshTokens = await refreshLogin({
                     accessToken: accessToken,
@@ -115,6 +119,9 @@ const RSVP = ({ menus }) => {
             };
 
             refresh();
+        }
+        else {
+            setLoaded(true);
         }
     }, []);
 
@@ -147,7 +154,7 @@ const RSVP = ({ menus }) => {
                                                     {
                                                         guests.map((guest, index) => {
                                                             return (
-                                                                <div key={guest.guestId} className='d-md-flex mb-3'>
+                                                                <div key={guest.guestId} className='d-md-flex'>
                                                                     {
                                                                         guest.isPlusOne ? (
                                                                             <div className="col d-flex p-1 m-auto">
@@ -248,7 +255,7 @@ const RSVP = ({ menus }) => {
                                                     <div className="text-right py-3">
                                                         <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Click to add more guests</button>
                                                     </div>
-                                                    <div className="mt-3">
+                                                    <div className="mt-2">
                                                         <textarea value={note} onChange={onChangeNoteHandler} placeholder="Notes"></textarea>
                                                     </div>
                                                     <div className="mt-4">
@@ -263,7 +270,7 @@ const RSVP = ({ menus }) => {
                         ) : (
                             <div className='row justify-content-center'>
                                 <div className='col-md-6 p-40'>
-                                    <form onSubmit={onLoginHandler}>
+                                    <form className='login-form' onSubmit={onLoginHandler}>
                                         <input type="text" />
                                         <button type="submit">Enter your email</button>
                                     </form>
@@ -287,8 +294,8 @@ const RSVP = ({ menus }) => {
                         </div>
                     )
                 }
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }
 

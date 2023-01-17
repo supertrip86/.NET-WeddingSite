@@ -395,8 +395,9 @@ input[type=radio]:checked:before {
 }
 
 .section-padding {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: 100vh;
 }
 
 .js .animate-box {
