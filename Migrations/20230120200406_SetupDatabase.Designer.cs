@@ -9,11 +9,11 @@ using WeddingSite.BackEnd.DAL;
 
 #nullable disable
 
-namespace WeddingSite.BackEnd.Migrations
+namespace WeddingSite.Migrations
 {
     [DbContext(typeof(WeddingSiteDbContext))]
-    [Migration("20230114235224_AddedPlusOneDiscriminatorForGuests")]
-    partial class AddedPlusOneDiscriminatorForGuests
+    [Migration("20230120200406_SetupDatabase")]
+    partial class SetupDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,9 +136,6 @@ namespace WeddingSite.BackEnd.Migrations
                     b.HasKey("GuestId");
 
                     b.HasIndex("InvitationRefId");
-
-                    b.HasIndex("LastName", "FirstName")
-                        .IsUnique();
 
                     b.ToTable("Guests");
                 });

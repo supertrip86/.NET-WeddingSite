@@ -8,7 +8,7 @@ using WeddingSite.BackEnd.DAL;
 
 #nullable disable
 
-namespace WeddingSite.BackEnd.Migrations
+namespace WeddingSite.Migrations
 {
     [DbContext(typeof(WeddingSiteDbContext))]
     partial class WeddingSiteDbContextModelSnapshot : ModelSnapshot
