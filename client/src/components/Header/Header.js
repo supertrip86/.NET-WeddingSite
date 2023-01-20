@@ -5,7 +5,7 @@ const Header = ({ couple, location, weddingDate }) => {
     const date = new Date(weddingDate);
 
     const day = date.getDate();
-    const month = date.toLocaleString('it-IT', { month: 'long' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
     const year = date.getFullYear();
 
     return (

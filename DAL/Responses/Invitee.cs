@@ -24,7 +24,12 @@ namespace WeddingSite.BackEnd.DAL.Responses
 
         public string Role { get; set; } = "Invitee";
 
-        public int GuestsCount { get; set; } = 0;
+        public int GuestsCount {
+            get
+            {
+                return Guests.Count;
+            }
+        }
 
         public virtual ICollection<Guest> Guests { get; set; } = new List<Guest>();
     }

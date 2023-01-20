@@ -24,10 +24,6 @@ namespace WeddingSite.BackEnd.DAL
                         .HasForeignKey(k => k.InvitationRefId)
                         .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Guest>()
-                        .HasIndex(p => new { p.LastName, p.FirstName })
-                        .IsUnique();
-
             modelBuilder.Entity<ActiveInvitee>()
                         .HasOne(k => k.Invitation)
                         .WithOne(k => k.ActiveInvitee)

@@ -9,8 +9,8 @@ const Spouses = ({ couple, location, weddingDate }) => {
 
     const date = new Date(weddingDate);
 
-    const day = date.toLocaleString('it-IT', { day: '2-digit' });
-    const month = date.toLocaleString('it-IT', { month: 'long' });
+    const day = date.toLocaleString('en-US', { day: '2-digit' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
     const monthCapitalized = `${month.charAt(0).toUpperCase()}${month.slice(1)}`;
     const year = date.getFullYear();
 

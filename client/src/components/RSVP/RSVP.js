@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import axiosPrivate from '../../api/axios';
+import Yes from '../../assets/images/RSVP/yes.png';
+import No from '../../assets/images/RSVP/no.png';
 
 const RSVP = ({ menus }) => {
     const [loaded, setLoaded] = useState(false);
@@ -146,10 +148,12 @@ const RSVP = ({ menus }) => {
                                             </div>
                                         ) : (
                                             <div className='col-md-12'>
-                                                <div className="mb-5">
+                                                <div className="mb-4">
                                                     <span className='wedding-title-meta text-center'>Will you attend?</span>
                                                     <h2 className='wedding-title text-center'>R.S.V.P</h2>
                                                 </div>
+                                                <div className='text-center mb-4'>{invitation.welcome}</div>
+                                                <div className='text-center mb-5'>Please, click on the <img className='example-image' src={No} /> button and switch it to <img className='example-image' src={Yes} /> for each attending guest.</div>
                                                 <form onSubmit={onSubmitHandler}>
                                                     {
                                                         guests.map((guest, index) => {

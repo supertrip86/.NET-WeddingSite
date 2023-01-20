@@ -8,9 +8,9 @@ const Sidebar = ({ couple, location, weddingDate }) => {
 
     const date = new Date(weddingDate);
 
-    const day = date.toLocaleString('it-IT', { day: '2-digit' });
-    const monthShort = date.toLocaleString('it-IT', { month: '2-digit' });
-    const monthLong = date.toLocaleString('it-IT', { month: 'long' });
+    const day = date.toLocaleString('en-US', { day: '2-digit' });
+    const monthShort = date.toLocaleString('en-US', { month: '2-digit' });
+    const monthLong = date.toLocaleString('en-US', { month: 'long' });
     const year = date.getFullYear();
 
     const openMenu = (e) => {

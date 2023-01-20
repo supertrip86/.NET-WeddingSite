@@ -15,12 +15,12 @@ namespace WeddingSite.BackEnd.DAL.Responses
 
         public bool Attending { get; set; }
 
-        public string ChosenMenu { get; set; } = string.Empty;
+        public string ChosenMenu { get; set; } = "Vegetarian";
 
         public string Allergies { get; set; } = string.Empty;
 
         public string Intolerances { get; set; } = string.Empty;
 
-        public string? Note { get; set; }
+        public string Note { get; set; } = string.Empty;
     }
 }
