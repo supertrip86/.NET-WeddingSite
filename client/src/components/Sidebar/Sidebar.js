@@ -55,6 +55,9 @@ const Sidebar = ({ couple, location }) => {
                             <Link onClick={closeMenu} to="rsvp" spy={true} smooth={true} duration={1000}>R.S.V.P</Link>
                         </li>
                         <li>
+                            <Link onClick={closeMenu} to="questions" spy={true} smooth={true} duration={1000}>Q+A</Link>
+                        </li>
+                        <li>
                             <Link onClick={closeMenu} to="story" spy={true} smooth={true} duration={1000}>Our Story</Link>
                         </li>
                         <li>

@@ -40,6 +40,11 @@ export const galleryImages = [
         filter: "noellegio"
     },
     {
+        src: require(`../../assets/images/Gallery/Noelle&Gio/9.jpg`),
+        label: "Noelle & Gio",
+        filter: "noellegio"
+    },
+    {
         src: require(`../../assets/images/Gallery/OurFamily/1.jpg`),
         label: "Our Family",
         filter: "family"
@@ -76,6 +81,26 @@ export const galleryImages = [
     },
     {
         src: require(`../../assets/images/Gallery/OurFamily/8.jpg`),
+        label: "Our Family",
+        filter: "family"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFamily/9.jpg`),
+        label: "Our Family",
+        filter: "family"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFamily/10.jpg`),
+        label: "Our Family",
+        filter: "family"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFamily/11.jpg`),
+        label: "Our Family",
+        filter: "family"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFamily/12.jpg`),
         label: "Our Family",
         filter: "family"
     },
@@ -141,6 +166,16 @@ export const galleryImages = [
     },
     {
         src: require(`../../assets/images/Gallery/OurFriends/13.jpg`),
+        label: "Our Friends",
+        filter: "friends"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFriends/14.jpg`),
+        label: "Our Friends",
+        filter: "friends"
+    },
+    {
+        src: require(`../../assets/images/Gallery/OurFriends/15.jpg`),
         label: "Our Friends",
         filter: "friends"
     }

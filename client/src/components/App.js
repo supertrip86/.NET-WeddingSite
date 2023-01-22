@@ -9,6 +9,7 @@ import WhenWhere from "./WhenWhere/WhenWhere";
 import RSVP from "./RSVP/RSVP";
 import Footer from './Footer/Footer';
 import Gifts from "./Gifts/Gifts";
+import Questions from "./Questions/Questions";
 
 const App = () => {
 
@@ -67,7 +68,7 @@ const App = () => {
                 <Spouses couple={couple} location={location} />
                 <WhenWhere drinks={drinks} location={location} hotel={hotel} />
                 <RSVP menus={location.menus} />
-                <Counter targetDate={location.weddingDate} />
+                <Questions location={location} />
                 <OurStory />
                 <Gallery />
                 <Gifts />

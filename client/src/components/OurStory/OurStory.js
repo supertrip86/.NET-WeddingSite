@@ -11,35 +11,37 @@ const OurStory = () => {
                             <div className='img'>
                                 <img src={storyImage} className='img-fluid' alt='' />
                             </div>
-                            <div
-                                className='story-img-2 story-wedding'
-                            ></div>
                         </div>
                     </div>
                     <div className='col-md-7 animate-box'>
-                        <h4 className='wedding-story-subtitle'>Our love.</h4>
-                        <h3 className='wedding-story-title'>Our Story</h3>
+                        <h4 className='wedding-story-subtitle'>Our Story</h4>
+                        <h3 className='wedding-story-title'>In a few words...</h3>
                         <p>
-                            Curabit aliquet orci elit genes tristique lorem commodo vitae.
-                            Tuliaum tincidunt nete sede gravida aliquam, neque libero
-                            hendrerit magna, sit amet mollis lacus ithe maurise. Dunya erat
-                            volutpat edat themo the druanye semper.
+                            Giovanni and Noelle met in Piazza Testaccio, Rome, in fall 2018. 
+                            Shortly thereafter, Noelle broke her finger playing Gaelic football 
+                            and Giovanni came to the rescue - taking her to the hospital, 
+                            waiting with her, and explaining everything!
                         </p>
                         <p>
-                            Luality fringilla duiman at elit vinibus viverra nec a lacus themo
-                            the druanye sene sollicitudin mi suscipit non sagie the fermen.
+                            Many adventures followed! Giovanni took her to see all of the sights 
+                            near and around Rome. They discovered a shared love of archeological 
+                            sites, hiking, canuzzi (dogs), board games, and local cheeses. 
+                            Together, they've traveled all over Italy, Lebanon, and Ethiopia.
                         </p>
                         <p>
-                            Phasellus viverra tristique justo duis vitae diam neque nivamus ac
-                            est augue artine aringilla dui at elit finibus viverra nec a
-                            lacus. Nedana themo eros odio semper soe suscipit non. Curabit
-                            aliquet orci elit genes tristique.
+                            When Noelle got Covid in March 2020, Giovanni diligently nursed her 
+                            back to health and his family supplied them with everything they needed.
                         </p>
-                        <h4>Dec 5th, 2021, We Said Yes!</h4>
                         <p>
-                            Luality fringilla duiman at elit finibus viverra nec a lacus themo
-                            the druanye sene sollicitudin mi suscipit non sagie the fermen.
+
                         </p>
+                        <p>
+                            In 2022, they moved to Giovanni's family home in Nicolosi, Sicily, 
+                            where Giovanni's aunt, uncle, cousins, and their jack russell kept 
+                            them in good cheer and company. In spring 2022, Noelle had to return 
+                            to New York to graduate from Columbia… Giovanni, however, had plans for her return!
+                        </p>
+                        <h4>In August, on top of the Colle di Nivolet, Giovanni proposed!</h4>
                     </div>
                 </div>
             </div>

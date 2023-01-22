@@ -24,18 +24,6 @@
     z-index: 2;
 }
 
-.story .story-img:after {
-    content: '';
-    width: 90%;
-    position: absolute;
-    top: -18%;
-    bottom: -25%;
-    left: 0;
-    background-image: url(../../assets/images/OurStory/dots.png);
-    background-repeat: repeat;
-    z-index: -1;
-}
-
 .story-img-2 {
     background-size: cover;
     background-position: center center;
