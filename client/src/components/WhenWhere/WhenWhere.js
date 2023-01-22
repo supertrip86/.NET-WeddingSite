@@ -1,13 +1,17 @@
 import './WhenWhere.css';
-import where1 from '../../assets/images/WhenWhere/where-1.jpg';
-import where3 from '../../assets/images/WhenWhere/where-3.jpg';
+import where1 from '../../assets/images/WhenWhere/drinks.jpg';
+import where2 from '../../assets/images/WhenWhere/location.jpg';
+import where3 from '../../assets/images/WhenWhere/hotel.jpg';
 import { useState } from 'react';
 import { Modal } from "react-bootstrap";
 import Map from '../Map/Map';
 
-const WhereWhere = ({ location, hotel }) => {
+const WhereWhere = ({ drinks, location, hotel }) => {
     const [showModal, setShow] = useState(false);
     const [position, setPosition] = useState({});
+
+    const drinksDate = new Date(drinks.drinksDate);
+    const weddingDate = new Date(location.weddingDate);
 
     const handleClose = () => setShow(false);
 
@@ -27,9 +31,31 @@ const WhereWhere = ({ location, hotel }) => {
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='item col-12 col-md-6'>
+                        <div className='col-md-12 mb-30'>
+                            <p>Click or tap over an image for the exact location on Google Maps.</p>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='item col-12 col-md-4'>
                             <div className='whenwhere-img'>
-                                <img src={where1} alt='' onClick={() => handleShow(location.position)} />
+                                <img src={where1} alt='' onClick={() => handleShow(drinks.position)} />
+                            </div>
+                            <div className='content'>
+                                <h5>Welcome Drinks (Night Before)</h5>
+                                <p>
+                                    <i className='ti-location-pin'></i> {drinks.name}, {drinks.address}, {drinks.city}
+                                </p>
+                                <p>
+                                    <i className='ti-calendar'></i> <span>{drinksDate.getDate()} {drinksDate.toLocaleString('en-US', { month: 'long' })} {drinksDate.getFullYear()}</span>
+                                </p>
+                                <p>
+                                    <i className='ti-time'></i> <span>{drinks.startingTime} – {drinks.endingTime}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div className='item col-12 col-md-4'>
+                            <div className='whenwhere-img'>
+                                <img src={where2} alt='' onClick={() => handleShow(location.position)} />
                             </div>
                             <div className='content'>
                                 <h5>Wedding Ceremony & Party</h5>
@@ -37,11 +63,14 @@ const WhereWhere = ({ location, hotel }) => {
                                     <i className='ti-location-pin'></i> {location.name}, {location.address}, {location.city}
                                 </p>
                                 <p>
+                                    <i className='ti-calendar'></i> <span>{weddingDate.getDate()} {weddingDate.toLocaleString('en-US', { month: 'long' })} {weddingDate.getFullYear()}</span>
+                                </p>
+                                <p>
                                     <i className='ti-time'></i> <span>{location.startingTime} – {location.endingTime}</span>
                                 </p>
                             </div>
                         </div>
-                        <div className='item col-12 col-md-6'>
+                        <div className='item col-12 col-md-4'>
                             <div className='whenwhere-img'>
                                 <img src={where3} alt='' onClick={() => handleShow(hotel.position)} />
                             </div>
@@ -52,6 +81,9 @@ const WhereWhere = ({ location, hotel }) => {
                                 </p>
                                 <p>
                                     <i className='ti-direction'></i> {hotel.distance}
+                                </p>
+                                <p>
+                                    <span><i className='ti-comments'></i> Special prices have been negotiated with this host</span>
                                 </p>
                             </div>
                         </div>

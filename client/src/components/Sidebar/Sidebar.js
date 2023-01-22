@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Link } from 'react-scroll';
 import Logo from "../../assets/images/Sidebar/logo.png";
 
-const Sidebar = ({ couple, location, weddingDate }) => {
+const Sidebar = ({ couple, location }) => {
     const [show, setShow] = useState(false);
 
-    const date = new Date(weddingDate);
+    const date = new Date(location.weddingDate);
 
     const day = date.toLocaleString('en-US', { day: '2-digit' });
     const monthShort = date.toLocaleString('en-US', { month: '2-digit' });
@@ -46,7 +46,7 @@ const Sidebar = ({ couple, location, weddingDate }) => {
                             <Link onClick={closeMenu} to="home" spy={true} smooth={true} duration={1000}>Home</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="couple" spy={true} smooth={true} duration={1000}>Featuring...</Link>
+                            <Link onClick={closeMenu} to="couple" spy={true} smooth={true} duration={1000}>Announcement</Link>
                         </li>
                         <li>
                             <Link onClick={closeMenu} to="whenwhere" spy={true} smooth={true} duration={1000}>When & Where</Link>

@@ -25,11 +25,26 @@ const App = () => {
         area: "Appia Antica",
         name: "Villa Rosantica",
         address: "Via Appia Antica 288",
+        menus: ["Vegetarian", "Vegan", "Gluten Free", "Normal (Fish)"],
+        weddingDate: "Jul 01, 2023 18:00:00",
         startingTime: "18:00pm",
         endingTime: "3:00am",
         position: {
-            lat: 41.830788,
-            lng: 12.544573
+            lat: 41.83272265800465,
+            lng: 12.541994257117752
+        }
+    };
+
+    const drinks = {
+        name: "L'Oasi della Birra",
+        city: "Rome",
+        address: "Piazza Testaccio 39",
+        drinksDate: "Jun 30, 2023 22:00:00",
+        startingTime: "22:00pm",
+        endingTime: "1:00am",
+        position: {
+            lat: 41.87974369485435,
+            lng: 12.477476786325914
         }
     };
 
@@ -44,23 +59,19 @@ const App = () => {
         }
     };
 
-    const menus = ["Vegetarian", "Vegan", "Gluten Free", "Normal (Fish)"];
-
-    const weddingDate = "Jul 01, 2023 18:00:00";
-
     return (
         <div>
-            <Sidebar couple={couple} location={location} weddingDate={weddingDate} />
+            <Sidebar couple={couple} location={location} />
             <div id="wedding-main">
-                <Header couple={couple} location={location} weddingDate={weddingDate} />
-                <Spouses couple={couple} location={location} weddingDate={weddingDate} />
-                <WhenWhere location={location} hotel={hotel} />
-                <RSVP menus={menus} />
-                <Counter targetDate={weddingDate} />
+                <Header couple={couple} location={location} />
+                <Spouses couple={couple} location={location} />
+                <WhenWhere drinks={drinks} location={location} hotel={hotel} />
+                <RSVP menus={location.menus} />
+                <Counter targetDate={location.weddingDate} />
                 <OurStory />
                 <Gallery />
                 <Gifts />
-                <Footer couple={couple} location={location} weddingDate={weddingDate} />
+                <Footer couple={couple} location={location} />
             </div>
         </div>
     );

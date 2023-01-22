@@ -7,7 +7,7 @@ import FsLightbox from "fslightbox-react";
 
 const Gallery = () => {
     const [filtered, setFiltered] = useState([]);
-    const [activeFilter, setActiveFilter] = useState("");
+    const [activeFilter, setActiveFilter] = useState("noellegio");
     const [isOpen, setOpen] = useState(false);
     const [currentImageIndex, setCurrentIndex] = useState(0);
 
@@ -40,9 +40,9 @@ const Gallery = () => {
                 </div>
                 <div className="row">
                     <ul className="col list-unstyled list-inline mb-0 gallery-menu" id="gallery-filter">
-                        <li onClick={() => setActiveFilter("")} className="list-inline-item"><span className={activeFilter === "" ? "active" : ""}>All</span></li>
-                        <li onClick={() => setActiveFilter("ceremony")} className="list-inline-item"><span className={activeFilter === "ceremony" ? "active" : ""}>Ceremony</span></li>
-                        <li onClick={() => setActiveFilter("party")} className="list-inline-item"><span className={activeFilter === "party" ? "active" : ""}>Party</span></li>
+                        <li onClick={() => setActiveFilter("noellegio")} className="list-inline-item"><span className={activeFilter === "noellegio" ? "active" : ""}>Noelle & Gio</span></li>
+                        <li onClick={() => setActiveFilter("family")} className="list-inline-item"><span className={activeFilter === "family" ? "active" : ""}>Our Family</span></li>
+                        <li onClick={() => setActiveFilter("friends")} className="list-inline-item"><span className={activeFilter === "friends" ? "active" : ""}>Our Friends</span></li>
                     </ul>
                 </div>
             </div>

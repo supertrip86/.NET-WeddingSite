@@ -15,7 +15,6 @@
     left: 0;
     overflow-y: scroll;
     z-index: 1001;
-    /* background-color: #F6F1F0; */
     background-color: var(--bgpink);
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
@@ -317,7 +316,7 @@
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-    background: var(--bgpink);
+    background: var(--main);
     margin: 15px 30px;
     border-radius: 50%;
 }

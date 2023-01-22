@@ -2,7 +2,6 @@
 
 :root {
     --main: #BD945A;
-    /* --main: #6f6f6f; */
     --bgpink: #FAF8F7;
 }
 
@@ -501,11 +500,7 @@ input[type=radio]:checked:before {
     position: relative;
     top: 12px;
     font-family: 'Alex Brush', cursive;
-    font-weight: 400;
-    font-size: 60px;
-    color: var(--main);
-    /* line-height: 1.5em; */
-    margin-bottom: 5px;
+    font-size: 50px;
 }
 
 .wedding-couple-subtitle {

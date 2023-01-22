@@ -7,10 +7,10 @@
     padding: 10px;
 }
 
-.login-form {
-    margin-top: 25vh;
-}
-
 .example-image {
     width: 50px;
+}
+
+.login-container {
+    margin-top: 10vh;
 }

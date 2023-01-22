@@ -1,8 +1,8 @@
 import './Header.css';
 import { motion } from 'framer-motion';
 
-const Header = ({ couple, location, weddingDate }) => {
-    const date = new Date(weddingDate);
+const Header = ({ couple, location }) => {
+    const date = new Date(location.weddingDate);
 
     const day = date.getDate();
     const month = date.toLocaleString('en-US', { month: 'long' });

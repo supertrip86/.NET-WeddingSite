@@ -4,10 +4,10 @@ import Groom from "../../assets/images/Spouses/groom.jpg";
 import { useCountdown } from '../../hooks/useCountdown';
 import Counter from '../Counter/Counter';
 
-const Spouses = ({ couple, location, weddingDate }) => {
-    const [days, hours, minutes, seconds] = useCountdown(weddingDate);
+const Spouses = ({ couple, location }) => {
+    const [days, hours, minutes, seconds] = useCountdown(location.weddingDate);
 
-    const date = new Date(weddingDate);
+    const date = new Date(location.weddingDate);
 
     const day = date.toLocaleString('en-US', { day: '2-digit' });
     const month = date.toLocaleString('en-US', { month: 'long' });
@@ -45,7 +45,7 @@ const Spouses = ({ couple, location, weddingDate }) => {
                         <h4 className="font-weight-light">{monthCapitalized} {day}, {year} – {location.city}, {location.area}</h4>
                     </div>
                     <div className="pt-3 pb-3 text-center">
-                        <h4 className="font-weight-light">No formal dressing code is required, you are encouraged to come as you are</h4>
+                        <h4 className="font-weight-light font-italic">Please, note that if you cannot attend we plan to have a celebration in the US at a later date.</h4>
                     </div>
                     <Counter
                         days={days}

@@ -11,6 +11,7 @@ const RSVP = ({ menus }) => {
     const [invitation, setInvitation] = useState({});
     const [guests, setGuests] = useState([]);
     const [note, setNote] = useState("");
+    const [error, setError] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
     const login = async (json) => await axiosPrivate.post("/api/auth/Login", json);
@@ -31,22 +32,28 @@ const RSVP = ({ menus }) => {
                 setNote(result.data.note);
             }
         }
-
+        setError(false);
         setLoaded(true);
     }
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
 
-        const email = e.target.querySelector("input").value;
+        try {
+            const email = e.target.querySelector("input").value;
 
-        setLoaded(false);
+            setLoaded(false);
 
-        const loginResult = await login({
-            email: email
-        });
+            const loginResult = await login({
+                email: email
+            });
 
-        await updateTokens(loginResult);
+            await updateTokens(loginResult);
+
+        } catch (error) {
+            setError(true);
+            setLoaded(true);
+        }
     }
 
     const onChangeHandler = async (e, index) => {
@@ -272,12 +279,30 @@ const RSVP = ({ menus }) => {
                                 </div>
                             </>
                         ) : (
-                            <div className='row justify-content-center'>
-                                <div className='col-md-6 p-40'>
-                                    <form className='login-form' onSubmit={onLoginHandler}>
-                                        <input type="text" />
-                                        <button type="submit">Enter your email</button>
-                                    </form>
+                            <div className='login-container'>
+                                <div className='row justify-content-center'>
+                                    <div className='col-md-12 mb-30'>
+                                        <h2 className='wedding-title-meta'>R.S.V.P</h2>
+                                    </div>
+                                </div>
+                                <div className='row justify-content-center text-center'>
+                                    <div className='col-md-12 p-40'>
+                                        {
+                                            error ? (
+                                                <h4>Invalid email. Please try again</h4>
+                                            ) : (
+                                                <h4>Insert your email in the input field below, and click on the "ENTER YOUR EMAIL" button</h4>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                                <div className='row justify-content-center'>
+                                    <div className='col-md-6 p-40'>
+                                        <form className='login-form' onSubmit={onLoginHandler}>
+                                            <input type="text" />
+                                            <button type="submit">Enter your email</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         )
