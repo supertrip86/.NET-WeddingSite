@@ -25,14 +25,22 @@ const WhereWhere = ({ drinks, location, hotel }) => {
             <div id='whenwhere' className='whenwhere section-padding bg-pink'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-md-12 mb-30'>
+                        <div className='col-md-12 mb-45'>
                             <span className='wedding-title-meta'>Questions</span>
                             <h2 className='wedding-title'>When & Where</h2>
                         </div>
                     </div>
                     <div className='row'>
                         <div className='col-md-12 mb-30'>
-                            <p>Click or tap over an image for the exact location on Google Maps.</p>
+                            <h5>Click or tap over an image for the exact location on Google Maps.</h5>
+                            <p>
+                                Please, be aware that Rome is a wildly popular tourist destination:
+                                if you are planning to come, it is important to make your flight and
+                                hotel reservations soon! If you need any advice or help finding flights
+                                and accommodations, please don't hesitate to reach out to us
+                                at <b><a href="mailto:nturtur@g.ucla.edu">nturtur@g.ucla.edu</a></b> or
+                                at <b>+1 914 274 0779</b>
+                            </p>
                         </div>
                     </div>
                     <div className='row'>
@@ -43,7 +51,10 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                             <div className='content'>
                                 <h5>Welcome Drinks (Night Before)</h5>
                                 <p>
-                                    <i className='ti-location-pin'></i> {drinks.name}, {drinks.address}, {drinks.city}
+                                    <i className='ti-location-pin'></i> {drinks.name}
+                                </p>
+                                <p>
+                                    <i className='ti-direction'></i> {drinks.address}, {drinks.city}
                                 </p>
                                 <p>
                                     <i className='ti-calendar'></i> <span>{drinksDate.getDate()} {drinksDate.toLocaleString('en-US', { month: 'long' })} {drinksDate.getFullYear()}</span>
@@ -60,7 +71,10 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                             <div className='content'>
                                 <h5>Wedding Ceremony & Party</h5>
                                 <p>
-                                    <i className='ti-location-pin'></i> {location.name}, {location.address}, {location.city}
+                                    <i className='ti-location-pin'></i> {location.name}
+                                </p>
+                                <p>
+                                    <i className='ti-direction'></i> {location.address}, {location.city}
                                 </p>
                                 <p>
                                     <i className='ti-calendar'></i> <span>{weddingDate.getDate()} {weddingDate.toLocaleString('en-US', { month: 'long' })} {weddingDate.getFullYear()}</span>
@@ -77,13 +91,16 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                             <div className='content'>
                                 <h5>Accomodations (If Needed)</h5>
                                 <p>
-                                    <i className='ti-direction-alt'></i> {hotel.name}, {hotel.address}, {hotel.city}
+                                    <i className='ti-location-pin'></i> {hotel.name}
                                 </p>
                                 <p>
-                                    <i className='ti-direction'></i> {hotel.distance}
+                                    <i className='ti-direction'></i> {hotel.address}, {hotel.city}
                                 </p>
                                 <p>
-                                    <span><i className='ti-comments'></i> Special prices have been negotiated with this host</span>
+                                    <i className='ti-direction-alt'></i> {hotel.distance}
+                                </p>
+                                <p>
+                                    <span><i className='ti-comments'></i> {hotel.notes}</span>
                                 </p>
                             </div>
                         </div>

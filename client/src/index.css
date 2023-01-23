@@ -21,12 +21,15 @@ body {
     color: #888;
 }
 
-.btn-info, .btn-info:hover {
+.btn-info,
+.btn-info:hover {
     background-color: gray !important;
     border-color: gray !important;
 }
 
-.btn-primary, .switch-group .btn-primary:hover, .switch-group .btn-primary:active {
+.btn-primary,
+.switch-group .btn-primary:hover,
+.switch-group .btn-primary:active {
     background-color: var(--main) !important;
     border-color: gray !important;
 }
@@ -378,6 +381,10 @@ input[type=radio]:checked:before {
     margin-bottom: 30px;
 }
 
+.mb-45 {
+    margin-bottom: 45px;
+}
+
 .mb-60 {
     margin-bottom: 60px;
 }
@@ -517,7 +524,7 @@ input[type=radio]:checked:before {
     top: 12px;
     font-family: 'Alex Brush', cursive;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 36px;
     color: var(--main);
     line-height: 1.5em;
     margin-bottom: 10px;

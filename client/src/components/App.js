@@ -50,13 +50,16 @@ const App = () => {
     };
 
     const hotel = {
-        name: "Hotel Favoloso",
+        name: "Tiber Rooms Testaccio",
         city: "Rome",
-        address: "Via Qualunque 99",
-        distance: "15 minutes from the Venue (car)",
+        address: "Via Amerigo Vespucci 34",
+        distance: "25 minutes from the Venue (car/taxi)",
+        notes: `Special prices have been negotiated with this host. 
+                Contact us to help you book your room, or talk to Chiara 
+                at +39 349 289 0832 (Phone/WhatsApp)`,
         position: {
-            lat: 41.853549,
-            lng: 12.468731
+            lat: 41.880808178244344,
+            lng: 12.474030726386609
         }
     };
 

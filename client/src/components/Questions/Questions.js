@@ -1,4 +1,3 @@
-
 const Questions = ({ location }) => {
     return (
         <div id='questions' className='section-padding'>
@@ -11,8 +10,16 @@ const Questions = ({ location }) => {
                 <div className='col-md-12 mb-30'>
                     <h4>Q: When and where will the ceremony and reception be?</h4>
                     <p>
-                        A: The ceremony and reception will be held in the same place - Villa Rosantica on the Appia
+                        A: The ceremony and reception will be held at the same location - Villa Rosantica on the Appia
                         Antica. Weather allowing, we will spend the day in the garden.
+                    </p>
+                </div>
+                <div className='col-md-12 mb-30'>
+                    <h4>Q: When should I book my flight and hotel?</h4>
+                    <p>
+                        A: Flights and hotel prices can be unpredictable. However, we suggest booking your flights
+                        and accommodations as soon as possible. It can also be difficult to book hotels in Rome in
+                        the summer as the city fills up.
                     </p>
                 </div>
                 <div className='col-md-12 mb-30'>
@@ -67,19 +74,21 @@ const Questions = ({ location }) => {
                 <div className='col-md-12 mb-30'>
                     <h4>Q: What is the best way to reach you if I have any questions?</h4>
                     <p>
-                        A: We will send our guests an email if anything changes.
-                    </p>
-                </div>
-                <div className='col-md-12 mb-30'>
-                    <h4>Q: What is the best way to reach Rome from the US?</h4>
-                    <p>
                         A: The best way to reach us is via email. Giovanni can be reached at
                         <a href="mailto:gio.giunta.86@gmail.com">gio.giunta.86@gmail.com</a>
                         and Noelle at <a href="mailto:nturtur@g.ucla.edu">nturtur@g.ucla.edu</a>.
                         In addition, we can both be reached via WhatsApp at the following numbers:
                     </p>
-                    <p>Giovanni: +39 345 528 0842 (whatsapp and phone)</p>
-                    <p>Noelle: +1 914 274 0779 (Whatsapp), +39 347 639 8038 (phone)</p>
+                    <p><b>Noelle</b>: +1 914 274 0779 (Whatsapp), +39 347 639 8038 (phone)</p>
+                    <p><b>Giovanni</b>: +39 345 528 0842 (whatsapp and phone)</p>
+                </div>
+                <div className='col-md-12 mb-30'>
+                    <h4>Q: What is the best way to reach Rome from the US?</h4>
+                    <p>
+                        A: There are direct flights from most U.S. cities to Rome Fiumicino Airport
+                        (FCO). However, direct flights can be quite expensive. In our experience,
+                        it costs less to fly via Dublin on Aerlingus or via Lisbon via Tap.
+                    </p>
                 </div>
                 <div className='col-md-12 mb-30'>
                     <h4>Q: Where should I stay in Rome?</h4>
@@ -128,6 +137,18 @@ const Questions = ({ location }) => {
                         portrait of Saint Francis of Assisi painted in his life.
                         For those interested in the Etruscans, check out Cerveteri and Tarquinia.
                         For those who want to go to the beach, we suggest a trip to Sperlonga.
+                    </p>
+                </div>
+                <div className='col-md-12 mb-30'>
+                    <h4>Q: If I plan to stay longer in Italy, what do you suggest?</h4>
+                    <p>
+                        A: Italy is a lovely country and there is so much to see. 
+                        It all depends on your preferences. If you intend to travel, I suggest 
+                        looking into the high-speed trains that connect most major Italian cities. 
+                        For example, it is about 1.5 hours from Rome to Florence. There are also 
+                        two major companies - Trenitalia and Italotreno. I suggest booking directly 
+                        on their websites rather than through a third-party vendor who will 
+                        charge more.
                     </p>
                 </div>
             </div>
