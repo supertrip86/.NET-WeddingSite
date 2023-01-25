@@ -60,8 +60,10 @@ const Gifts = () => {
                                                 <td><h5>{bankingDetails.bankRoutingNumber}</h5></td>
                                             </tr>
                                             <tr>
-                                                <td><h5>Bank Address:</h5></td>
-                                                <td><h5>{bankingDetails.bankAddress}</h5></td>
+                                                <td colSpan='2'></td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="2"><h5>{bankingDetails.bankAddress}</h5></td>
                                             </tr>
                                         </tbody>
                                     </table>
