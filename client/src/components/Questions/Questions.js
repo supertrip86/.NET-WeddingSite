@@ -74,9 +74,9 @@ const Questions = ({ location }) => {
                 <div className='col-md-12 mb-30'>
                     <h4>Q: What is the best way to reach you if I have any questions?</h4>
                     <p>
-                        A: The best way to reach us is via email. Giovanni can be reached at
-                        <a href="mailto:gio.giunta.86@gmail.com">gio.giunta.86@gmail.com</a>
-                        and Noelle at <a href="mailto:nturtur@g.ucla.edu">nturtur@g.ucla.edu</a>.
+                        A: The best way to reach us is via email. Giovanni can be reached 
+                        at <b><a href="mailto:gio.giunta.86@gmail.com">gio.giunta.86@gmail.com</a></b> and 
+                        Noelle at <b><a href="mailto:nturtur@g.ucla.edu">nturtur@g.ucla.edu</a></b>.
                         In addition, we can both be reached via WhatsApp at the following numbers:
                     </p>
                     <p><b>Noelle</b>: +1 914 274 0779 (Whatsapp), +39 347 639 8038 (phone)</p>
@@ -142,13 +142,10 @@ const Questions = ({ location }) => {
                 <div className='col-md-12 mb-30'>
                     <h4>Q: If I plan to stay longer in Italy, what do you suggest?</h4>
                     <p>
-                        A: Italy is a lovely country and there is so much to see. 
-                        It all depends on your preferences. If you intend to travel, I suggest 
-                        looking into the high-speed trains that connect most major Italian cities. 
-                        For example, it is about 1.5 hours from Rome to Florence. There are also 
-                        two major companies - Trenitalia and Italotreno. I suggest booking directly 
-                        on their websites rather than through a third-party vendor who will 
-                        charge more.
+                        A: Italy is a lovely country and there is so much to see. It all depends 
+                        on your preferences. If you intend to travel, we suggest using the high speed 
+                        trains operated by Trenitalia and Italotreno to visit the major cities, such 
+                        as Florence and Naples. It's about 1.5 hours from Rome to Florence.
                     </p>
                 </div>
             </div>

@@ -26,7 +26,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-12 mb-45'>
-                            <span className='wedding-title-meta'>Questions</span>
+                            <span className='wedding-title-meta'>The Event</span>
                             <h2 className='wedding-title'>When & Where</h2>
                         </div>
                     </div>

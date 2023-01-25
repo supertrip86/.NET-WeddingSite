@@ -1,6 +1,8 @@
 import './RSVP.css';
 import { useState, useEffect } from 'react';
+import { useBetween } from "use-between";
 import { TailSpin } from 'react-loader-spinner';
+import { useShareableState } from '../../hooks/useShareableState';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import axiosPrivate from '../../api/axios';
 import Yes from '../../assets/images/RSVP/yes.png';
@@ -13,6 +15,7 @@ const RSVP = ({ menus }) => {
     const [note, setNote] = useState("");
     const [error, setError] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const { loggedIn, setLoggedIn } = useBetween(useShareableState);
 
     const login = async (json) => await axiosPrivate.post("/api/auth/Login", json);
     const refreshLogin = async (json) => await axiosPrivate.post("/api/auth/RefreshLogin", json);
@@ -30,6 +33,7 @@ const RSVP = ({ menus }) => {
                 setInvitation(result.data);
                 setGuests(result.data.guests);
                 setNote(result.data.note);
+                setLoggedIn(true);
             }
         }
         setError(false);
@@ -139,7 +143,7 @@ const RSVP = ({ menus }) => {
             <div className='container'>
                 {
                     loaded ? (
-                        (invitation.firstName) ? (
+                        loggedIn ? (
                             <>
                                 <div className='row justify-content-center'>
                                     <div className='col-md-6 text-center'>

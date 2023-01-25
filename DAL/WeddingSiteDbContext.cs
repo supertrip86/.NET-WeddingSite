@@ -30,6 +30,8 @@ namespace WeddingSite.BackEnd.DAL
                         .HasForeignKey<ActiveInvitee>(k => k.InvitationRefId)
                         .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<BankingDetails>();
+
             base.OnModelCreating(modelBuilder);
         }
 

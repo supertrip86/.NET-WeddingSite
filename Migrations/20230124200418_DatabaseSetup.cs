@@ -5,10 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeddingSite.Migrations
 {
-    public partial class SetupDatabase : Migration
+    public partial class DatabaseSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BankingDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BankAccountHolder = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BankAccountNumber = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BankRoutingNumber = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BankAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BankingDetails", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Invitees",
                 columns: table => new
@@ -104,6 +120,9 @@ namespace WeddingSite.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ActiveInvitees");
+
+            migrationBuilder.DropTable(
+                name: "BankingDetails");
 
             migrationBuilder.DropTable(
                 name: "Guests");

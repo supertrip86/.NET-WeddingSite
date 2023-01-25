@@ -72,6 +72,7 @@ try
     builder.Services.AddAutoMapper(typeof(GuestsMapping));
     builder.Services.AddAutoMapper(typeof(InvitationsMapping));
     builder.Services.AddAutoMapper(typeof(ActiveInviteesMapping));
+    builder.Services.AddAutoMapper(typeof(BankingDetailsMapping));
 
     builder.Services.AddSpaStaticFiles(configure => {
         configure.RootPath = "client/build";

@@ -1,5 +1,26 @@
 /* =====  Gift Registry style  ===== */
 
+.gift-section h5 {
+    margin: 0;
+}
+
+.gift-section table,
+.gift-section tr {
+    border: none;
+}
+
+.gift-section td {
+    padding: 5px 10px;
+}
+
+.gift-section td:nth-child(1) {
+    text-align: right;
+}
+
+.gift-section td:nth-child(2) {
+    text-align: left;
+}
+
 .gift {
     background-color: #fff;
     padding: 30px 0;
@@ -8,4 +29,8 @@
 .gifts-img {
     width: 65%;
     border-radius: 8px;
+}
+
+.table-borderless {
+    margin: auto;
 }

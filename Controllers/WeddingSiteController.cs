@@ -231,6 +231,30 @@ namespace WeddingSite.BackEnd.Controllers
             }
         }
 
+        [Authorize(Policy = Policies.Authorized)]
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetBankingDetails()
+        {
+            try
+            {
+                var result = await _context.GetAll<Models.BankingDetails>().FirstOrDefaultAsync();
+
+                if (result == default)
+                {
+                    return NotFound("No banking details have been found");
+                }
+
+                var response = _mapper.Map<Responses.BankingDetails>(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         #endregion
 
         #region PUT

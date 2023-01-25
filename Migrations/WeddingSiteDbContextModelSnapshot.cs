@@ -75,6 +75,44 @@ namespace WeddingSite.Migrations
                     b.ToTable("ActiveInvitees");
                 });
 
+            modelBuilder.Entity("WeddingSite.BackEnd.DAL.Models.BankingDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("BankAccountHolder")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("BankAccountHolder");
+
+                    b.Property<string>("BankAccountNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("BankAccountNumber");
+
+                    b.Property<string>("BankAddress")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("BankAddress");
+
+                    b.Property<string>("BankRoutingNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("BankRoutingNumber");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BankingDetails");
+                });
+
             modelBuilder.Entity("WeddingSite.BackEnd.DAL.Models.Guest", b =>
                 {
                     b.Property<int>("GuestId")
