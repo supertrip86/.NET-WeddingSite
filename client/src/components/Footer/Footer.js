@@ -4,8 +4,8 @@ import Logo from '../../assets/images/Footer/logo.png'
 const Footer = ({ couple, location }) => {
     const date = new Date(location.weddingDate);
 
-    const day = date.toLocaleString('en-US', { day: '2-digit' });
-    const month = date.toLocaleString('en-US', { month: 'long' });
+    const day = date.toLocaleString('it-IT', { day: '2-digit' });
+    const month = date.toLocaleString('it-IT', { month: 'long' });
     const monthCapitalized = `${month.charAt(0).toUpperCase()}${month.slice(1)}`;
     const year = date.getFullYear();
 

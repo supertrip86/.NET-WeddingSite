@@ -9,8 +9,8 @@ const Spouses = ({ couple, location }) => {
 
     const date = new Date(location.weddingDate);
 
-    const day = date.toLocaleString('en-US', { day: '2-digit' });
-    const month = date.toLocaleString('en-US', { month: 'long' });
+    const day = date.toLocaleString('it-IT', { day: '2-digit' });
+    const month = date.toLocaleString('it-IT', { month: 'long' });
     const monthCapitalized = `${month.charAt(0).toUpperCase()}${month.slice(1)}`;
     const year = date.getFullYear();
 
@@ -24,7 +24,7 @@ const Spouses = ({ couple, location }) => {
                                 <div className="img"> <img src={Bride} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
-                                        <h6>{couple.bride} {couple.brideSurname} </h6> <span>The Bride</span>
+                                        <h6>{couple.bride} {couple.brideSurname} </h6> <span>La Sposa</span>
                                     </div>
                                 </div>
                             </div>
@@ -34,18 +34,15 @@ const Spouses = ({ couple, location }) => {
                                 <div className="img"> <img src={Groom} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
-                                        <h6>{couple.groom} {couple.groomSurname} </h6> <span>The Groom</span>
+                                        <h6>{couple.groom} {couple.groomSurname} </h6> <span>Lo Sposo</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="pt-3 pb-3 text-center">
-                        <h3 className="wedding-couple-title">Are getting married!</h3>
+                        <h3 className="wedding-couple-title">Si Sposano!</h3>
                         <h4 className="font-weight-light">{monthCapitalized} {day}, {year} – {location.city}, {location.area}</h4>
-                    </div>
-                    <div className="pt-3 pb-3 text-center">
-                        <h4 className="font-weight-light font-italic">Please, note that if you cannot attend we plan to have a celebration in the US at a later date.</h4>
                     </div>
                     <Counter
                         days={days}

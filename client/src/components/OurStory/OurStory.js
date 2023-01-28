@@ -14,34 +14,32 @@ const OurStory = () => {
                         </div>
                     </div>
                     <div className='col-md-7 animate-box'>
-                        <h4 className='wedding-story-subtitle'>Our Story</h4>
-                        <h3 className='wedding-story-title'>In a few words...</h3>
+                        <h4 className='wedding-story-subtitle'>La Nostra Storia</h4>
+                        <h3 className='wedding-story-title'>In poche parole (di Noelle Turtur)</h3>
                         <p>
-                            Giovanni and Noelle met in Piazza Testaccio, Rome, in fall 2018. 
-                            Shortly thereafter, Noelle broke her finger playing Gaelic football 
-                            and Giovanni came to the rescue - taking her to the hospital, 
-                            waiting with her, and explaining everything!
+                            Giovanni e Noelle si sono conosciuti a Piazza Testaccio, a Roma, 
+                            nell'autunno 2018. Poco tempo dopo, Noelle si è rotta un dito giocando 
+                            a calcio gaelico e Giovanni l'ha soccorsa portandola in ospedale, tenendole 
+                            compagnia e spiegando tutto ad una americana appena arrivata in Italia!
                         </p>
                         <p>
-                            Many adventures followed! Giovanni took her to see all of the sights 
-                            near and around Rome. They discovered a shared love of archeological 
-                            sites, hiking, canuzzi (dogs), board games, and local cheeses. 
-                            Together, they've traveled all over Italy, Lebanon, and Ethiopia.
+                            Seguirono molte avventure. Giovanni la portò a vedere mille bellissimi posti a Roma 
+                            ed in giro per il Lazio. Nel frattempo, scoprivano sempre più interessi in comune:
+                            siti archeologici, escursioni, canuzzi, giochi da tavolo e diversi tipi di formaggio. 
+                            Insieme, hanno viaggiato in tutta Italia, in Libano, in Etiopia e negli Stati Uniti.
                         </p>
                         <p>
-                            When Noelle got Covid in March 2020, Giovanni diligently nursed her 
-                            back to health and his family supplied them with everything they needed.
+                            Quando Noelle si è ammalata di Covid nel marzo 2020, Giovanni ha fatto tutto il possibile 
+                            per soccorrerla e rimetterla in sesto. La sua famiglia è stata così gentile da fornire 
+                            tutto il supporto possibile!
                         </p>
                         <p>
-
+                            Nel 2022 si trasferiscono a Nicolosi, in Sicilia, dove zii, cugini, un jack russell e nuovi 
+                            amici hanno rallegrato le loro giornate. Nella primavera del 2022, Noelle dovette tornare a 
+                            New York per conseguire il proprio dottorato alla Columbia University. 
+                            Giovanni, però, aveva dei progetti per il suo ritorno!
                         </p>
-                        <p>
-                            In 2022, they moved to Giovanni's family home in Nicolosi, Sicily, 
-                            where Giovanni's aunt, uncle, cousins, and their jack russell kept 
-                            them in good cheer and company. In spring 2022, Noelle had to return 
-                            to New York to graduate from Columbia… Giovanni, however, had plans for her return!
-                        </p>
-                        <h4>In August, on top of the Colle di Nivolet, Giovanni proposed!</h4>
+                        <h4>Ad agosto, in cima al Colle di Nivolet, Giovanni le ha chiesto di sposarlo!</h4>
                     </div>
                 </div>
             </div>

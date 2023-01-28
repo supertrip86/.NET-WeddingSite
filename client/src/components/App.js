@@ -2,14 +2,12 @@ import "./App.css";
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import Spouses from "./Spouses/Spouses";
-import Counter from "./Counter/Counter";
 import OurStory from './OurStory/OurStory';
 import Gallery from "./Gallery/Gallery";
 import WhenWhere from "./WhenWhere/WhenWhere";
 import RSVP from "./RSVP/RSVP";
 import Footer from './Footer/Footer';
 import Gifts from "./Gifts/Gifts";
-import Questions from "./Questions/Questions";
 
 const App = () => {
 
@@ -21,12 +19,12 @@ const App = () => {
     };
 
     const location = {
-        country: "Italy",
-        city: "Rome",
+        country: "Italia",
+        city: "Roma",
         area: "Appia Antica",
         name: "Villa Rosantica",
         address: "Via Appia Antica 288",
-        menus: ["Vegetarian", "Vegan", "Gluten Free", "Normal (Fish)"],
+        menus: ["Vegetariano", "Vegano", "Senza Glutine", "Normale (Pesce)"],
         weddingDate: "Jul 01, 2023 18:00:00",
         startingTime: "18:00pm",
         endingTime: "3:00am",
@@ -38,7 +36,7 @@ const App = () => {
 
     const drinks = {
         name: "L'Oasi della Birra",
-        city: "Rome",
+        city: "Roma",
         address: "Piazza Testaccio 39",
         drinksDate: "Jun 30, 2023 22:00:00",
         startingTime: "22:00pm",
@@ -51,12 +49,12 @@ const App = () => {
 
     const hotel = {
         name: "Tiber Rooms Testaccio",
-        city: "Rome",
+        city: "Roma",
         address: "Via Amerigo Vespucci 34",
-        distance: "25 minutes from the Venue (car/taxi)",
-        notes: `Special prices have been negotiated with this host. 
-                Contact us to help you book your room, or talk to Chiara 
-                at +39 349 289 0832 (Phone/WhatsApp)`,
+        distance: "25 minuti dalla location (macchina/taxi)",
+        notes: `Abbiamo negoziato delle offerte presso questa struttura. 
+                Contattateci se avete bisogno di aiuto per prenotazioni, 
+                o contattate Chiara al +39 349 289 0832`,
         position: {
             lat: 41.880808178244344,
             lng: 12.474030726386609
@@ -71,10 +69,9 @@ const App = () => {
                 <Spouses couple={couple} location={location} />
                 <WhenWhere drinks={drinks} location={location} hotel={hotel} />
                 <RSVP menus={location.menus} />
-                <Questions location={location} />
                 <OurStory />
                 <Gallery />
-                <Gifts />
+                {/* <Gifts /> */}
                 <Footer couple={couple} location={location} />
             </div>
         </div>

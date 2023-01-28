@@ -30,12 +30,6 @@ namespace WeddingSite.BackEnd.DAL.Models
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(int.MaxValue)]
-        [DataType(DataType.Text)]
-        [Column("RefreshToken")]
-        public string RefreshToken { get; set; } = string.Empty;
-
-        [Required]
         [DataType(DataType.DateTime)]
         [Column("Active")]
         public DateTime Active { get; set; } = DateTime.Now;
@@ -44,6 +38,12 @@ namespace WeddingSite.BackEnd.DAL.Models
         [DataType(DataType.DateTime)]
         [Column("Expiration")]
         public DateTime Expiration { get; set; } = DateTime.Now.AddMonths(6);
+
+        [Required]
+        [StringLength(int.MaxValue)]
+        [DataType(DataType.Text)]
+        [Column("RefreshToken")]
+        public string RefreshToken { get; set; } = string.Empty;
 
         [Required]
         [ForeignKey("Invitation")]

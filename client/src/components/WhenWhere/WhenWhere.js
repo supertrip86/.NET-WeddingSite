@@ -26,20 +26,22 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-12 mb-45'>
-                            <span className='wedding-title-meta'>The Event</span>
-                            <h2 className='wedding-title'>When & Where</h2>
+                            <span className='wedding-title-meta'>L'Evento</span>
+                            <h2 className='wedding-title'>Dove e Quando</h2>
                         </div>
                     </div>
                     <div className='row'>
                         <div className='col-md-12 mb-30'>
-                            <h5>Click or tap over an image for the exact location on Google Maps.</h5>
+                            <h5>Clicca (o tocca) l'immagine di una location per visualizzarne la posizione su Google Maps</h5>
                             <p>
-                                Please, be aware that Rome is a wildly popular tourist destination:
-                                if you are planning to come, it is important to make your flight and
-                                hotel reservations soon! If you need any advice or help finding flights
-                                and accommodations, please don't hesitate to reach out to us
-                                at <b><a href="mailto:nturtur@g.ucla.edu">nturtur@g.ucla.edu</a></b> or
-                                at <b>+1 914 274 0779</b>
+                                <b>NOTA</b>: Fra giugno e luglio Roma è presa d'assalto dai turisti! Se pensate di riuscire a 
+                                venire, prenotate un alloggio il più presto possibile. Contattateci al <b>+39 345 52 80 842</b> o 
+                                scrivete a <b><a href="mailto:gio.giunta.86@gmail.com">gio.giunta.86@gmail.com</a></b> e vi 
+                                aiuteremo a trovare una sistemazione!
+                            </p>
+                            <p>
+                                <b>P.S.</b> mi dice Noelle di specificare che saremo in un giardino, per cui occhio al tipo di 
+                                calzature che indosserete!
                             </p>
                         </div>
                     </div>
@@ -49,7 +51,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                                 <img src={where1} alt='' onClick={() => handleShow(drinks.position)} />
                             </div>
                             <div className='content'>
-                                <h5>Welcome Drinks (Night Before)</h5>
+                                <h5>Drink di Benvenuto (La Sera Prima)</h5>
                                 <p>
                                     <i className='ti-location-pin'></i> {drinks.name}
                                 </p>
@@ -57,7 +59,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                                     <i className='ti-direction'></i> {drinks.address}, {drinks.city}
                                 </p>
                                 <p>
-                                    <i className='ti-calendar'></i> <span>{drinksDate.getDate()} {drinksDate.toLocaleString('en-US', { month: 'long' })} {drinksDate.getFullYear()}</span>
+                                    <i className='ti-calendar'></i> <span>{drinksDate.getDate()} {drinksDate.toLocaleString('it-IT', { month: 'long' })} {drinksDate.getFullYear()}</span>
                                 </p>
                                 <p>
                                     <i className='ti-time'></i> <span>{drinks.startingTime} – {drinks.endingTime}</span>
@@ -69,7 +71,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                                 <img src={where2} alt='' onClick={() => handleShow(location.position)} />
                             </div>
                             <div className='content'>
-                                <h5>Wedding Ceremony & Party</h5>
+                                <h5>Matrimonio e Festeggiamenti</h5>
                                 <p>
                                     <i className='ti-location-pin'></i> {location.name}
                                 </p>
@@ -77,7 +79,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                                     <i className='ti-direction'></i> {location.address}, {location.city}
                                 </p>
                                 <p>
-                                    <i className='ti-calendar'></i> <span>{weddingDate.getDate()} {weddingDate.toLocaleString('en-US', { month: 'long' })} {weddingDate.getFullYear()}</span>
+                                    <i className='ti-calendar'></i> <span>{weddingDate.getDate()} {weddingDate.toLocaleString('it-IT', { month: 'long' })} {weddingDate.getFullYear()}</span>
                                 </p>
                                 <p>
                                     <i className='ti-time'></i> <span>{location.startingTime} – {location.endingTime}</span>
@@ -89,7 +91,7 @@ const WhereWhere = ({ drinks, location, hotel }) => {
                                 <img src={where3} alt='' onClick={() => handleShow(hotel.position)} />
                             </div>
                             <div className='content'>
-                                <h5>Accomodations (If Needed)</h5>
+                                <h5>Alloggi (Se Necessari)</h5>
                                 <p>
                                     <i className='ti-location-pin'></i> {hotel.name}
                                 </p>

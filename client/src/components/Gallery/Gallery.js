@@ -34,15 +34,15 @@ const Gallery = () => {
             <div className='container'>
                 <div className='row'>
                     <div className='col-md-12 mb-30'>
-                        <span className='wedding-title-meta'>Gallery</span>
-                        <h2 className='wedding-title'>Our Memories</h2>
+                        <span className='wedding-title-meta'>Galleria</span>
+                        <h2 className='wedding-title'>I Nostri Ricordi</h2>
                     </div>
                 </div>
                 <div className="row">
                     <ul className="col list-unstyled list-inline mb-0 gallery-menu" id="gallery-filter">
                         <li onClick={() => setActiveFilter("noellegio")} className="list-inline-item"><span className={activeFilter === "noellegio" ? "active" : ""}>Noelle & Gio</span></li>
-                        <li onClick={() => setActiveFilter("family")} className="list-inline-item"><span className={activeFilter === "family" ? "active" : ""}>Our Family</span></li>
-                        <li onClick={() => setActiveFilter("friends")} className="list-inline-item"><span className={activeFilter === "friends" ? "active" : ""}>Our Friends</span></li>
+                        <li onClick={() => setActiveFilter("family")} className="list-inline-item"><span className={activeFilter === "family" ? "active" : ""}>La Nostra Famiglia</span></li>
+                        <li onClick={() => setActiveFilter("friends")} className="list-inline-item"><span className={activeFilter === "friends" ? "active" : ""}>I Nostri Amici</span></li>
                     </ul>
                 </div>
             </div>

@@ -34,10 +34,6 @@ namespace WeddingSite.BackEnd.DAL.Models
         [Column("Password")]
         public string Password { get; set; } = string.Empty;
 
-        [Required]
-        [Column("Attending")]
-        public bool Attending { get; set; }
-
         [StringLength(500)]
         [DataType(DataType.Text)]
         [Column("Welcome")]

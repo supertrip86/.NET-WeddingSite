@@ -16,8 +16,6 @@ namespace WeddingSite.BackEnd.DAL.Responses
 
         public string Password { get; set; } = new Password(6).IncludeLowercase().IncludeUppercase().IncludeNumeric().Next();
 
-        public bool Attending { get; set; } = false;
-
         public string Welcome { get; set; } = string.Empty;
 
         public string Note { get; set; } = string.Empty;

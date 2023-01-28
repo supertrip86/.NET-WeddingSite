@@ -10,23 +10,23 @@ const Counter = ({ days, hours, minutes, seconds }) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='section-head col-md-12'>
-                            <h4>Join us in:</h4>
+                            <h4>Mancano solo:</h4>
                         </div>
                     </div>
                     <div className='row'>
                         <div className='col-md-12'>
                             <ul>
                                 <li>
-                                    <span id='days'>{days}</span>Days
+                                    <span id='days'>{days}</span>Giorni
                                 </li>
                                 <li>
-                                    <span id='hours'>{hours}</span>Hours
+                                    <span id='hours'>{hours}</span>Ore
                                 </li>
                                 <li>
-                                    <span id='minutes'>{minutes}</span>Minutes
+                                    <span id='minutes'>{minutes}</span>Minuti
                                 </li>
                                 <li>
-                                    <span id='seconds'>{seconds}</span>Seconds
+                                    <span id='seconds'>{seconds}</span>Secondi
                                 </li>
                             </ul>
                         </div>

@@ -275,7 +275,6 @@ namespace WeddingSite.BackEnd.Controllers
                     return NotFound("No invitee has been found");
                 }
 
-                entity.Attending = request.Attending;
                 entity.Note = request.Note;
                 entity.GuestsCount = request.Guests.Count;
                 entity.Email = string.IsNullOrEmpty(request.Email) ? entity.Email : request.Email;

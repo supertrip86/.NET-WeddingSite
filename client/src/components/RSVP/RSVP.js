@@ -3,10 +3,7 @@ import { useState, useEffect } from 'react';
 import { useBetween } from "use-between";
 import { TailSpin } from 'react-loader-spinner';
 import { useShareableState } from '../../hooks/useShareableState';
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import axiosPrivate from '../../api/axios';
-import Yes from '../../assets/images/RSVP/yes.png';
-import No from '../../assets/images/RSVP/no.png';
 
 const RSVP = ({ menus }) => {
     const [loaded, setLoaded] = useState(false);
@@ -66,10 +63,10 @@ const RSVP = ({ menus }) => {
         const { name, value } = e.target;
         const edits = [...guests];
 
-        edits[index][name] = value;
+        edits[index][name] = value === "true" ? true : (value === "false" ? false : value);
 
         setGuests(edits);
-        setInvitation({ ...invitation, guests: edits })
+        setInvitation({ ...invitation, guests: edits });
     }
 
     const onChangeNoteHandler = async (e) => {
@@ -105,7 +102,7 @@ const RSVP = ({ menus }) => {
             invitation: null,
             attending: true,
             isPlusOne: true,
-            chosenMenu: 'Vegetarian',
+            chosenMenu: 'Vegetariano',
             allergies: '',
             intolerances: '',
             note: '',
@@ -147,24 +144,23 @@ const RSVP = ({ menus }) => {
                             <>
                                 <div className='row justify-content-center'>
                                     <div className='col-md-6 text-center'>
-                                        <h3>Hi {invitation.firstName}!</h3>
+                                        <h3>Ciao {invitation.firstName}!</h3>
                                     </div>
                                 </div>
                                 <div className='row justify-content-center'>
                                     {
                                         submitted ? (
                                             <div className='text-center'>
-                                                <h2 className='wedding-title my-5'>Thank you for letting us know!</h2>
-                                                <h4 className='font-weight-light'>Feel free to come back to this page anytime you want to make a change with your reservation</h4>
+                                                <h2 className='wedding-title my-5'>Grazie per averci fatto sapere!</h2>
+                                                <h4 className='font-weight-light'>Tornate su questa pagina se volete fare delle modifiche alla vostra prenotazione</h4>
                                             </div>
                                         ) : (
                                             <div className='col-md-12'>
                                                 <div className="mb-4">
-                                                    <span className='wedding-title-meta text-center'>Will you attend?</span>
+                                                    <span className='wedding-title-meta text-center'>Ci sarete?</span>
                                                     <h2 className='wedding-title text-center'>R.S.V.P</h2>
                                                 </div>
                                                 <div className='text-center mb-4'>{invitation.welcome}</div>
-                                                <div className='text-center mb-5'>Please, click on the <img className='example-image' src={No} /> button and switch it to <img className='example-image' src={Yes} /> for each attending guest.</div>
                                                 <form onSubmit={onSubmitHandler}>
                                                     {
                                                         guests.map((guest, index) => {
@@ -173,37 +169,52 @@ const RSVP = ({ menus }) => {
                                                                     {
                                                                         guest.isPlusOne ? (
                                                                             <div className="col d-flex p-1 m-auto">
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.firstName}
-                                                                                    name="firstName"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type="text"
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='First Name'
-                                                                                    onInvalid={e => e.target.setCustomValidity('Enter First Name')}
-                                                                                    onInput={e => e.target.setCustomValidity('')}
-                                                                                    required
-                                                                                />
-                                                                                <input
-                                                                                    autoComplete="off"
-                                                                                    value={guest.lastName}
-                                                                                    name="lastName"
-                                                                                    onChange={e => onChangeHandler(e, index)}
-                                                                                    type="text"
-                                                                                    className='form-control my-2'
-                                                                                    placeholder='Last Name'
-                                                                                    onInvalid={e => e.target.setCustomValidity('Enter Last Name')}
-                                                                                    onInput={e => e.target.setCustomValidity('')}
-                                                                                    required
-                                                                                />
+                                                                                <div>
+                                                                                    <label htmlFor={`guest-name-${index}`}></label>
+                                                                                    <input
+                                                                                        id={`guest-name-${index}`}
+                                                                                        autoComplete="off"
+                                                                                        value={guest.firstName}
+                                                                                        name="firstName"
+                                                                                        onChange={e => onChangeHandler(e, index)}
+                                                                                        type="text"
+                                                                                        className='form-control my-2'
+                                                                                        placeholder='Nome'
+                                                                                        onInvalid={e => e.target.setCustomValidity('Inserisci il Nome')}
+                                                                                        onInput={e => e.target.setCustomValidity('')}
+                                                                                        required
+                                                                                    />
+                                                                                </div>
+                                                                                <div>
+                                                                                    <label htmlFor={`guest-lastname-${index}`}></label>
+                                                                                    <input
+                                                                                        id={`guest-lastname-${index}`}
+                                                                                        autoComplete="off"
+                                                                                        value={guest.lastName}
+                                                                                        name="lastName"
+                                                                                        onChange={e => onChangeHandler(e, index)}
+                                                                                        type="text"
+                                                                                        className='form-control my-2'
+                                                                                        placeholder='Cognome'
+                                                                                        onInvalid={e => e.target.setCustomValidity('Inserisci il Cognome')}
+                                                                                        onInput={e => e.target.setCustomValidity('')}
+                                                                                        required
+                                                                                    />
+                                                                                </div>
                                                                             </div>
                                                                         ) : (
-                                                                            <div className="col p-1 m-auto">{guest.firstName} {guest.lastName}</div>
+                                                                            <div className="col p-1 m-auto">
+                                                                                <label htmlFor={`guest-name-${index}`}></label>
+                                                                                <div id={`guest-name-${index}`}>
+                                                                                    {guest.firstName} {guest.lastName}
+                                                                                </div>
+                                                                            </div>
                                                                         )
                                                                     }
                                                                     <div className="col-xs col-md-2 p-1 m-auto">
+                                                                        <label htmlFor={`guest-menu-${index}`}></label>
                                                                         <select
+                                                                            id={`guest-menu-${index}`}
                                                                             value={guest.chosenMenu}
                                                                             name="chosenMenu"
                                                                             onChange={e => onChangeHandler(e, index)}
@@ -219,47 +230,56 @@ const RSVP = ({ menus }) => {
                                                                         </select>
                                                                     </div>
                                                                     <div className="col p-1 m-auto">
+                                                                        <label htmlFor={`guest-has-allergies-${index}`}></label>
                                                                         <input
+                                                                            id={`guest-has-allergies-${index}`}
                                                                             autoComplete="off"
                                                                             value={guest.allergies}
                                                                             name="allergies"
                                                                             onChange={e => onChangeHandler(e, index)}
                                                                             type='text'
                                                                             className='form-control my-2'
-                                                                            placeholder='Allergies'
+                                                                            placeholder='Allergie'
                                                                         />
                                                                     </div>
                                                                     <div className="col p-1 m-auto">
+                                                                        <label htmlFor={`guest-has-intolerances-${index}`}></label>
                                                                         <input
+                                                                            id={`guest-has-intolerances-${index}`}
                                                                             autoComplete="off"
                                                                             value={guest.intolerances}
                                                                             name="intolerances"
                                                                             onChange={e => onChangeHandler(e, index)}
                                                                             type='text'
                                                                             className='form-control my-2'
-                                                                            placeholder='Intolerances'
+                                                                            placeholder='Intolleranze'
                                                                         />
                                                                     </div>
                                                                     {
                                                                         guest.isPlusOne ? (
                                                                             <div className="col-1 p-1 m-auto">
+                                                                                <label htmlFor={`guest-is-attending-${index}`}></label>
                                                                                 <button
+                                                                                    id={`guest-is-attending-${index}`}
                                                                                     type="button"
                                                                                     className='btn btn-primary btn-rsvp'
                                                                                     onClick={e => onClickRemoveGuest(e, guest.guestId)}
-                                                                                >Remove</button>
+                                                                                >Rimuovi</button>
                                                                             </div>
                                                                         ) : (
-                                                                            <div className="col-1 text-center p-1 m-auto">
-                                                                                <BootstrapSwitchButton
-                                                                                    checked={guest.attending}
+                                                                            <div className="col-xs col-md-2 text-center p-1 m-auto">
+                                                                                <label htmlFor={`guest-is-attending-${index}`}><b>Parteciperà?</b></label>
+                                                                                <select
+                                                                                    id={`guest-is-attending-${index}`}
+                                                                                    value={guest.attending}
                                                                                     name="attending"
-                                                                                    onstyle="primary"
-                                                                                    offstyle="info"
-                                                                                    onlabel="Yes"
-                                                                                    offlabel="No"
-                                                                                    onChange={checked => guest.attending = checked}
-                                                                                />
+                                                                                    onChange={e => onChangeHandler(e, index)}
+                                                                                    className="form-control my-2"
+                                                                                >
+                                                                                    <option value="">Seleziona</option>
+                                                                                    <option value={false}>No</option>
+                                                                                    <option value={true}>Si</option>
+                                                                                </select>
                                                                             </div>
                                                                         )
                                                                     }
@@ -268,13 +288,13 @@ const RSVP = ({ menus }) => {
                                                         })
                                                     }
                                                     <div className="text-right py-3">
-                                                        <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Click to add more guests</button>
+                                                        <button type="button" className='btn btn-primary btn-rsvp' onClick={onClickAdd}>Clicca per aggiungere invitati</button>
                                                     </div>
                                                     <div className="mt-2">
-                                                        <textarea value={note} onChange={onChangeNoteHandler} placeholder="Notes"></textarea>
+                                                        <textarea value={note} onChange={onChangeNoteHandler} placeholder="Note"></textarea>
                                                     </div>
                                                     <div className="mt-4">
-                                                        <input type='submit' className='btn buttono' value='SEND' />
+                                                        <input type='submit' className='btn buttono' value='INVIA' />
                                                     </div>
                                                 </form>
                                             </div>
@@ -293,9 +313,9 @@ const RSVP = ({ menus }) => {
                                     <div className='col-md-12 p-40'>
                                         {
                                             error ? (
-                                                <h4>Invalid email. Please try again</h4>
+                                                <h4>Email non valida. Prova di nuovo</h4>
                                             ) : (
-                                                <h4>Insert your email in the input field below, and click on the "ENTER YOUR EMAIL" button</h4>
+                                                <h4>Inserisci la tua email nel campo qui in basso, poi clicca sul pulsante "INVIA"</h4>
                                             )
                                         }
                                     </div>
@@ -304,14 +324,14 @@ const RSVP = ({ menus }) => {
                                     <div className='col-md-6 p-40'>
                                         <form className='login-form' onSubmit={onLoginHandler}>
                                             <input type="text" />
-                                            <button type="submit">Enter your email</button>
+                                            <button type="submit">Invia</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         )
                     ) : (
-                        <div className='row justify-content-center'>
+                        <div className='row justify-content-center loading-wrapper'>
                             <div className='col-md-6 text-center'>
                                 <TailSpin
                                     height="80"

@@ -8,9 +8,9 @@ const Sidebar = ({ couple, location }) => {
 
     const date = new Date(location.weddingDate);
 
-    const day = date.toLocaleString('en-US', { day: '2-digit' });
-    const monthShort = date.toLocaleString('en-US', { month: '2-digit' });
-    const monthLong = date.toLocaleString('en-US', { month: 'long' });
+    const day = date.toLocaleString('it-IT', { day: '2-digit' });
+    const monthShort = date.toLocaleString('it-IT', { month: '2-digit' });
+    const monthLong = date.toLocaleString('it-IT', { month: 'long' });
     const year = date.getFullYear();
 
     const openMenu = (e) => {
@@ -46,25 +46,22 @@ const Sidebar = ({ couple, location }) => {
                             <Link onClick={closeMenu} to="home" spy={true} smooth={true} duration={1000}>Home</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="couple" spy={true} smooth={true} duration={1000}>Announcement</Link>
+                            <Link onClick={closeMenu} to="couple" spy={true} smooth={true} duration={1000}>Annuncio</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="whenwhere" spy={true} smooth={true} duration={1000}>The Event</Link>
+                            <Link onClick={closeMenu} to="whenwhere" spy={true} smooth={true} duration={1000}>L'Evento</Link>
                         </li>
                         <li>
                             <Link onClick={closeMenu} to="rsvp" spy={true} smooth={true} duration={1000}>R.S.V.P</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="questions" spy={true} smooth={true} duration={1000}>Q+A</Link>
+                            <Link onClick={closeMenu} to="story" spy={true} smooth={true} duration={1000}>La Nostra Storia</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="story" spy={true} smooth={true} duration={1000}>Our Story</Link>
+                            <Link onClick={closeMenu} to="gallery" spy={true} smooth={true} duration={1000}>Galleria</Link>
                         </li>
                         <li>
-                            <Link onClick={closeMenu} to="gallery" spy={true} smooth={true} duration={1000}>Gallery</Link>
-                        </li>
-                        <li>
-                            <Link onClick={closeMenu} to="gift" spy={true} smooth={true} duration={1000}>Gift</Link>
+                            <Link onClick={closeMenu} to="gift" spy={true} smooth={true} duration={1000}>Regalo</Link>
                         </li>
                     </ul>
                 </nav>

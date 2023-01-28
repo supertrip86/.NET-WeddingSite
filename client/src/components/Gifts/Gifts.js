@@ -30,7 +30,7 @@ const Gifts = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <span className="wedding-title-meta">Gift</span>
+                        <span className="wedding-title-meta">Regalo</span>
                     </div>
                 </div>
                 <div className="row text-center mt-3">
@@ -39,31 +39,26 @@ const Gifts = () => {
                             <>
                                 <div className="col-md-12">
                                     <h4>
-                                        We can't wait to celebrate our big day with you!
-                                        Your presence is more than enough, but if you feel
-                                        like it, contribute a "brick" to our future home
+                                        Siete disposti a venire a Roma d'estate, nonostante il caldo e i turisti... 
+                                        Questo per noi è già un grande regalo, nonché una grande dimostrazione
+                                        d'affetto. Qualora tuttavia voleste proprio esagerare, perché non contribuire 
+                                        regalandoci un "mattone" per la nostra futura casa?
                                     </h4>
                                 </div>
                                 <div className="col-md-12">
                                     <table className="table-borderless">
                                         <tbody>
                                             <tr>
-                                                <td><h5>Bank Account Holder:</h5></td>
+                                                <td><h5>Conto intestato a:</h5></td>
                                                 <td><h5>{bankingDetails.bankAccountHolder}</h5></td>
                                             </tr>
                                             <tr>
-                                                <td><h5>Account Number:</h5></td>
+                                                <td><h5>IBAN:</h5></td>
                                                 <td><h5>{bankingDetails.bankAccountNumber}</h5></td>
                                             </tr>
                                             <tr>
-                                                <td><h5>Routing Number:</h5></td>
-                                                <td><h5>{bankingDetails.bankRoutingNumber}</h5></td>
-                                            </tr>
-                                            <tr>
-                                                <td colSpan='2'></td>
-                                            </tr>
-                                            <tr>
-                                                <td colSpan="2"><h5>{bankingDetails.bankAddress}</h5></td>
+                                                <td><h5>Indirizzo Banca:</h5></td>
+                                                <td><h5>{bankingDetails.bankAddress}</h5></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -71,7 +66,7 @@ const Gifts = () => {
                             </>
                         ) : (
                             <div className="col-md-12 mb-4">
-                                <h4>Please, log in to the RSVP section to access this information</h4>
+                                <h4>Effettua il login nella sezione "RSVP" per accedere a questa informazione</h4>
                             </div>
                         )
                     }
