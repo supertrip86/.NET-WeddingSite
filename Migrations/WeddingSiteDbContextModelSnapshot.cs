@@ -185,10 +185,6 @@ namespace WeddingSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvitationId"), 1L, 1);
 
-                    b.Property<bool>("Attending")
-                        .HasColumnType("bit")
-                        .HasColumnName("Attending");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)

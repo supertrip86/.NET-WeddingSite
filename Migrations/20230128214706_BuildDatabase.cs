@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeddingSite.Migrations
 {
-    public partial class DatabaseSetup : Migration
+    public partial class BuildDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,6 @@ namespace WeddingSite.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Attending = table.Column<bool>(type: "bit", nullable: false),
                     Welcome = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Role = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -55,9 +54,9 @@ namespace WeddingSite.Migrations
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: false),
                     Active = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: false),
                     InvitationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

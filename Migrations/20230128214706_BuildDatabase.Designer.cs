@@ -12,8 +12,8 @@ using WeddingSite.BackEnd.DAL;
 namespace WeddingSite.Migrations
 {
     [DbContext(typeof(WeddingSiteDbContext))]
-    [Migration("20230124200418_DatabaseSetup")]
-    partial class DatabaseSetup
+    [Migration("20230128214706_BuildDatabase")]
+    partial class BuildDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,10 +186,6 @@ namespace WeddingSite.Migrations
                         .HasColumnName("InvitationId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvitationId"), 1L, 1);
-
-                    b.Property<bool>("Attending")
-                        .HasColumnType("bit")
-                        .HasColumnName("Attending");
 
                     b.Property<string>("Email")
                         .IsRequired()
