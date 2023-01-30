@@ -15,7 +15,7 @@ const OurStory = () => {
                     </div>
                     <div className='col-md-7 animate-box'>
                         <h4 className='wedding-story-subtitle'>La Nostra Storia</h4>
-                        <h3 className='wedding-story-title'>In poche parole (di Noelle Turtur)</h3>
+                        <h3 className='wedding-story-title'>In poche parole <span className="our-story-subtitle">(di Noelle Turtur)</span></h3>
                         <p>
                             Giovanni e Noelle si sono conosciuti a Piazza Testaccio, a Roma, 
                             nell'autunno 2018. Poco tempo dopo, Noelle si è rotta un dito giocando 
@@ -34,7 +34,7 @@ const OurStory = () => {
                             tutto il supporto possibile!
                         </p>
                         <p>
-                            Nel 2022 si trasferiscono a Nicolosi, in Sicilia, dove zii, cugini, un jack russell e nuovi 
+                            Nel 2021 si trasferiscono a Nicolosi, in Sicilia, dove zii, cugini, un jack russell e nuovi 
                             amici hanno rallegrato le loro giornate. Nella primavera del 2022, Noelle dovette tornare a 
                             New York per conseguire il proprio dottorato alla Columbia University. 
                             Giovanni, però, aveva dei progetti per il suo ritorno!

@@ -40,6 +40,10 @@
     z-index: 3;
 }
 
+.our-story-subtitle {
+    font-size: 20px;
+}
+
 .story-wedding {
     animation: rotation 12s infinite linear;
     -webkit-animation: rotation 12s infinite linear;

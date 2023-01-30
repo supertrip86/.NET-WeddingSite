@@ -71,7 +71,7 @@ const App = () => {
                 <RSVP menus={location.menus} />
                 <OurStory />
                 <Gallery />
-                {/* <Gifts /> */}
+                <Gifts />
                 <Footer couple={couple} location={location} />
             </div>
         </div>

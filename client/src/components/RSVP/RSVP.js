@@ -77,6 +77,19 @@ const RSVP = ({ menus }) => {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
+        const checkValidity = invitation.guests.filter(guest => {
+            const firstCondition = guest.firstName.trim().toLowerCase() === "alessandro" && guest.lastName.trim().toLowerCase() === "cascio";
+            const secondCondition = guest.firstName.trim().toLowerCase() === "elisa" && guest.lastName.trim().toLowerCase() === "cardillo";
+
+            if (firstCondition || secondCondition) {
+                return guest;
+            }
+        });
+
+        if (checkValidity.length) {
+            return alert(`Ahahahah, ${invitation.firstName}, sei un mattacchione ;)`);
+        }
+
         setLoaded(false);
 
         await updateInvitation(invitation);
@@ -276,7 +289,6 @@ const RSVP = ({ menus }) => {
                                                                                     onChange={e => onChangeHandler(e, index)}
                                                                                     className="form-control my-2"
                                                                                 >
-                                                                                    <option value="">Seleziona</option>
                                                                                     <option value={false}>No</option>
                                                                                     <option value={true}>Si</option>
                                                                                 </select>

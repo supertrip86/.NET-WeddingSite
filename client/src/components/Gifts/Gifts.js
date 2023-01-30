@@ -57,7 +57,7 @@ const Gifts = () => {
                                                 <td><h5>{bankingDetails.bankAccountNumber}</h5></td>
                                             </tr>
                                             <tr>
-                                                <td><h5>Indirizzo Banca:</h5></td>
+                                                <td><h5>Banca:</h5></td>
                                                 <td><h5>{bankingDetails.bankAddress}</h5></td>
                                             </tr>
                                         </tbody>
