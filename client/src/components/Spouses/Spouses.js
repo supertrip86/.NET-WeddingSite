@@ -24,7 +24,7 @@ const Spouses = ({ couple, location }) => {
                                 <div className="img"> <img src={Bride} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
-                                        <h6>{couple.bride} {couple.brideSurname} </h6> <span>La Sposa</span>
+                                        <h6>{couple.bride} {couple.brideSurname} </h6>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@ const Spouses = ({ couple, location }) => {
                                 <div className="img"> <img src={Groom} alt="" /> </div>
                                 <div className="info valign">
                                     <div className="full-width">
-                                        <h6>{couple.groom} {couple.groomSurname} </h6> <span>Lo Sposo</span>
+                                        <h6>{couple.groom} {couple.groomSurname} </h6>
                                     </div>
                                 </div>
                             </div>
