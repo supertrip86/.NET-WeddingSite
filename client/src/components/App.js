@@ -24,7 +24,7 @@ const App = () => {
         area: "Appia Antica",
         name: "Villa Rosantica",
         address: "Via Appia Antica 288",
-        menus: ["Vegetariano", "Vegano", "Senza Glutine", "Normale (Pesce)"],
+        menus: ["Vegetariano", "Vegano", "Senza Glutine", "Normale (Pesce)", "Bambini"],
         weddingDate: "Jul 01, 2023 18:00:00",
         startingTime: "18:00pm",
         endingTime: "3:00am",
