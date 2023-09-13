@@ -238,7 +238,9 @@ namespace WeddingSite.BackEnd.Controllers
         {
             try
             {
-                var result = await _context.GetAll<Models.BankingDetails>().FirstOrDefaultAsync();
+                var result = await _context.GetAll<Models.BankingDetails>()
+                                           .OrderBy(x => x.Id)
+                                           .FirstOrDefaultAsync();
 
                 if (result == default)
                 {

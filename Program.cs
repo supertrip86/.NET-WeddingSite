@@ -105,6 +105,7 @@ try
         build.UseSpa(spa =>
         {
             spa.Options.SourcePath = "client";
+            spa.Options.DefaultPage = "/index.html";
 
             if (builder.Environment.IsDevelopment())
             {
